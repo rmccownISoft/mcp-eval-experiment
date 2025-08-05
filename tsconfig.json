@@ -2,7 +2,7 @@
 	"ts-node": {
 		"files": true
 	},
-	"include": ["src/**/*"],
+	"include": ["src/**/*", "tests/tests"],
 	"compilerOptions": {
         "target": "ES2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
         "module": "ES2020", /* Specify what module code is generated. */
