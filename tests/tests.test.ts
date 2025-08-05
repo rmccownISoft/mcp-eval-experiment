@@ -5,7 +5,7 @@
 
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { MCPTestSuite, LLMProvider, ConfigManager, loadConfig } from '../src/index';
+import { MCPTestSuite, LLMProvider, ConfigManager, loadConfig } from '../src/index.js';
 
 test('Phase 1: Library exports are available', () => {
   assert.ok(MCPTestSuite, 'MCPTestSuite should be exported');
