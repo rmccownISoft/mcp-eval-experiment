@@ -1,0 +1,31 @@
+{
+	"ts-node": {
+		"files": true
+	},
+	"include": ["src/**/*"],
+	"compilerOptions": {
+		"target": "es2018",
+		"module": "Node16",
+		"lib": ["es2017", "esnext", "es6", "dom"],
+		"allowJs": true,
+		"maxNodeModuleJsDepth": 10,
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"removeComments": true,
+		"strict": true,
+		"noImplicitAny": false,
+		"strictNullChecks": true,
+		"exactOptionalPropertyTypes": true,
+		"noUnusedLocals": false,
+		"noImplicitReturns": false,
+		"moduleResolution": "Node16",
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true
+	},
+	"exclude": ["dist", "node_modules", "tools", "codegen.ts", "test.js", "eslint.config.js", "examples", "config"]
+}
