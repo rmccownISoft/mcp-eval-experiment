@@ -4,6 +4,7 @@
   "description": "A comprehensive TypeScript test suite to evaluate GraphQL-API MCP server effectiveness for AI agents",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "bin": {
     "mcp-test-suite": "./dist/cli/index.js"
   },
