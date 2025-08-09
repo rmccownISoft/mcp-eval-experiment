@@ -69,18 +69,108 @@ Create a comprehensive TypeScript test suite to evaluate the effectiveness of a 
 - Library exports are properly typed and documented
 
 ### Phase 2: MCP Server Integration
+Transform the stub MCPClient into a fully functional MCP client that communicates with the GraphQL-API MCP server via HTTP transport using JSON-RPC 2.0.
+
+**IMPORTANT**: Complete each sub-phase as a standalone unit. Test thoroughly before proceeding to the next sub-phase.
+
+#### Phase 2.1: HTTP Transport & MCP Protocol Foundation
 **Deliverables**:
-- MCP client implementation for GraphQL-API server
-- Authentication flow (username/password/store ID)
-- Schema exploration tool integration
-- Basic GraphQL query execution
-- Connection error handling
+- JSON-RPC 2.0 HTTP client implementation
+- MCP protocol message handling (initialize, tools/list, tools/call)
+- Basic connection lifecycle management
+- Network error handling and timeouts
+- Update MCPServerConfig type for HTTP transport
 
 **Testing Criteria**:
-- Successfully authenticate with test credentials
-- Schema exploration returns valid GraphQL schema information
-- Can execute simple GraphQL queries through MCP
-- Proper error handling for connection failures
+- Successfully connect to MCP server via HTTP
+- Proper MCP protocol initialization handshake
+- Can list available tools from server
+- Network failures handled gracefully
+- Configuration supports HTTP endpoints
+
+#### Phase 2.2: Authentication & Session Management
+**Deliverables**:
+- Implement `authenticate(username, password, selectedStoreId)` tool call
+- Authentication state tracking and management
+- Implement `get_session_info()` and `close_session()` tools
+- Handle authentication success/failure responses
+- Auto-disable/enable authenticate tool based on login status
+
+**Testing Criteria**:
+- Successful authentication with valid credentials
+- Proper error handling for invalid credentials
+- Authentication state persists across tool calls
+- Session management works correctly
+- Tool availability changes based on auth state
+
+#### Phase 2.3: Schema Exploration Tools
+**Deliverables**:
+- Implement `explore_schema(type, items?)` tool call
+- Implement `search_schema(keyword)` tool call
+- Handle schema item types and response parsing
+- Support for both single items and arrays
+- Proper error handling for invalid schema requests
+
+**Testing Criteria**:
+- Schema exploration returns valid schema information
+- Search functionality finds relevant schema items
+- Both single and multiple item requests work
+- Invalid requests return appropriate errors
+- Schema responses are properly parsed
+
+#### Phase 2.4: GraphQL Query Execution
+**Deliverables**:
+- Implement `query_graphql(query, variables?)` tool call
+- GraphQL query validation and error handling
+- Response parsing and error detection
+- Support for query variables
+- Mutation blocking (read-only enforcement)
+
+**Testing Criteria**:
+- Can execute simple GraphQL queries successfully
+- Query variables are properly passed
+- GraphQL errors are detected and reported
+- Mutations are properly blocked
+- Response data is correctly parsed
+
+#### Phase 2.5: Utility Tools & Integration
+**Deliverables**:
+- Implement remaining utility tools (`get_current_date`, `get_server_information_query`, `quick_reference`)
+- Enhanced tool call tracking with actual metrics
+- Integration with existing configuration system
+- Comprehensive error handling and logging
+- Update type definitions for all new functionality
+
+**Testing Criteria**:
+- All utility tools work correctly
+- Tool call tracking captures real latency and success metrics
+- Configuration system properly supports MCP settings
+- Error messages are clear and actionable
+- Type definitions are complete and accurate
+
+#### Phase 2.6: Integration Testing & Validation
+**Deliverables**:
+- Comprehensive integration tests for all MCP functionality
+- End-to-end testing with actual MCP server
+- Performance benchmarking for tool calls
+- Documentation updates with usage examples
+- Validation of all Phase 2 testing criteria
+
+**Testing Criteria**:
+- All 9 MCP tools can be called successfully
+- Authentication flow works end-to-end
+- Schema operations return expected results
+- GraphQL queries execute without errors
+- Tool call metrics are accurately captured
+- Integration with existing library architecture is seamless
+
+**Overall Phase 2 Success Criteria**:
+- Complete MCP client can authenticate and maintain sessions
+- All server tools are accessible and functional
+- Schema exploration provides useful information for AI agents
+- GraphQL queries execute reliably with proper error handling
+- Tool call tracking provides accurate performance metrics
+- Client integrates seamlessly with existing configuration and type systems
 
 ### Phase 3: Thin Client & LLM Integration
 **Deliverables**:
