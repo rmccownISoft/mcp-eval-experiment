@@ -2,6 +2,13 @@
  * Core type definitions for the MCP Test Suite
  */
 
+// Import and re-export MCP Client types
+import type { SchemaType, MCPServerConfig, MCPConnectionState, MCPToolCall } from './mcp/MCPClient.js';
+import { MCPServerError } from './mcp/MCPClient.js';
+
+export type { SchemaType, MCPServerConfig, MCPConnectionState, MCPToolCall };
+export { MCPServerError };
+
 // LLM Provider Types
 export enum LLMProvider {
   CLAUDE = 'claude',
@@ -15,18 +22,6 @@ export interface APIKeys {
   gemini?: string;
   chatgpt?: string;
   gpt4?: string; // For evaluation
-}
-
-export interface MCPServerConfig {
-  url: string;
-  transport: 'http' | 'stdio' | 'sse';
-  timeout?: number;
-  username?: string;
-  password?: string;
-  storeId?: string;
-  // For stdio transport
-  command?: string;
-  args?: string[];
 }
 
 export interface LLMConfig {
@@ -78,17 +73,6 @@ export interface ConversationState {
   startTime: Date;
   lastActivity: Date;
   metadata?: Record<string, any>;
-}
-
-// MCP Tool Tracking
-export interface MCPToolCall {
-  toolName: string;
-  parameters: Record<string, any>;
-  timestamp: Date;
-  duration: number;
-  success: boolean;
-  response?: any;
-  error?: string;
 }
 
 // Test Metrics
@@ -194,12 +178,5 @@ export class LLMProviderError extends MCPTestError {
   constructor(message: string, details?: any) {
     super(message, 'LLM_PROVIDER_ERROR', details);
     this.name = 'LLMProviderError';
-  }
-}
-
-export class MCPServerError extends MCPTestError {
-  constructor(message: string, details?: any) {
-    super(message, 'MCP_SERVER_ERROR', details);
-    this.name = 'MCPServerError';
   }
 }
