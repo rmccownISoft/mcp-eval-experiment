@@ -19,9 +19,14 @@ export interface APIKeys {
 
 export interface MCPServerConfig {
   url: string;
+  transport: 'http' | 'stdio' | 'sse';
+  timeout?: number;
   username?: string;
   password?: string;
   storeId?: string;
+  // For stdio transport
+  command?: string;
+  args?: string[];
 }
 
 export interface LLMConfig {

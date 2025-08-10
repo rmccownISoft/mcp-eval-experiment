@@ -45,7 +45,8 @@ program
       const configOptions: Partial<TestConfig> = {
         llmProvider: llmProvider as LLMProvider,
         mcpServer: {
-          url: options.server
+          url: options.server,
+          transport: 'http'
         },
         outputDir: options.output,
         verbose: options.verbose,

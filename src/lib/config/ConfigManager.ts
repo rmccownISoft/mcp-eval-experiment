@@ -110,7 +110,8 @@ export class ConfigManager {
     // MCP Server
     if (process.env.MCP_SERVER_URL) {
       const mcpServer: TestConfig['mcpServer'] = {
-        url: process.env.MCP_SERVER_URL
+        url: process.env.MCP_SERVER_URL,
+        transport: 'http'
       };
       if (process.env.MCP_USERNAME) mcpServer.username = process.env.MCP_USERNAME;
       if (process.env.MCP_PASSWORD) mcpServer.password = process.env.MCP_PASSWORD;
@@ -148,7 +149,8 @@ export class ConfigManager {
     const defaults: TestConfig = {
       llmProvider,
       mcpServer: {
-        url: 'http://localhost:3000'
+        url: 'http://localhost:3000',
+        transport: 'http'
       },
       apiKeys: {},
       llmConfig: {

@@ -23,7 +23,7 @@ test('Phase 1: LLMProvider enum has correct values', () => {
 test('Phase 1: ConfigManager can be created with minimal config', () => {
   const config = new ConfigManager({
     llmProvider: LLMProvider.CLAUDE,
-    mcpServer: { url: 'http://localhost:3000' },
+    mcpServer: { url: 'http://localhost:3000', transport: 'http' },
     apiKeys: { claude: 'test-key' }
   });
   
@@ -37,7 +37,7 @@ test('Phase 1: ConfigManager validates required fields', () => {
   assert.throws(() => {
     new ConfigManager({
       llmProvider: LLMProvider.CLAUDE,
-      mcpServer: { url: 'http://localhost:3000' },
+      mcpServer: { url: 'http://localhost:3000', transport: 'http' },
       apiKeys: {} // Missing required API key
     });
   }, /Missing API key for claude/);
@@ -46,7 +46,7 @@ test('Phase 1: ConfigManager validates required fields', () => {
 test('Phase 1: MCPTestSuite can be initialized', () => {
   const testSuite = new MCPTestSuite({
     llmProvider: LLMProvider.CLAUDE,
-    mcpServer: { url: 'http://localhost:3000' },
+    mcpServer: { url: 'http://localhost:3000', transport: 'http' },
     apiKeys: { claude: 'test-key' }
   });
   
@@ -57,7 +57,7 @@ test('Phase 1: MCPTestSuite can be initialized', () => {
 test('Phase 1: MCPTestSuite environment validation works', async () => {
   const testSuite = new MCPTestSuite({
     llmProvider: LLMProvider.CLAUDE,
-    mcpServer: { url: 'http://localhost:3000' },
+    mcpServer: { url: 'http://localhost:3000', transport: 'http' },
     apiKeys: { claude: 'test-key' }
   });
   
@@ -69,7 +69,7 @@ test('Phase 1: MCPTestSuite environment validation works', async () => {
 test('Phase 1: MCPTestSuite can run tests (stub implementation)', async () => {
   const testSuite = new MCPTestSuite({
     llmProvider: LLMProvider.CLAUDE,
-    mcpServer: { url: 'http://localhost:3000' },
+    mcpServer: { url: 'http://localhost:3000', transport: 'http' },
     apiKeys: { claude: 'test-key' }
   });
   
@@ -84,7 +84,7 @@ test('Phase 1: loadConfig function works', () => {
   const configManager = loadConfig({
     config: {
       llmProvider: LLMProvider.GEMINI,
-      mcpServer: { url: 'http://localhost:3000' },
+      mcpServer: { url: 'http://localhost:3000', transport: 'http' },
       apiKeys: { gemini: 'test-key' }
     },
     useEnvironment: false
