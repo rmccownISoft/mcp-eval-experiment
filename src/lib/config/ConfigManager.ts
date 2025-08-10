@@ -115,7 +115,7 @@ export class ConfigManager {
       };
       if (process.env.MCP_USERNAME) mcpServer.username = process.env.MCP_USERNAME;
       if (process.env.MCP_PASSWORD) mcpServer.password = process.env.MCP_PASSWORD;
-      if (process.env.MCP_STORE_ID) mcpServer.storeId = process.env.MCP_STORE_ID;
+      if (process.env.MCP_STORE_ID) mcpServer.storeId = parseInt(process.env.MCP_STORE_ID);
       config.mcpServer = mcpServer;
     }
 
