@@ -57,7 +57,9 @@ const testSuite = new MCPTestSuite({
   mcpServer: {
     url: 'http://localhost:3000',
     username: 'test_user',
-    password: 'test_password'
+    password: 'test_password',
+    transport: 'http',      // New in Phase 2.1
+    timeout: 30000         // New in Phase 2.1
   },
   apiKeys: {
     claude: 'sk-ant-api03-...'
@@ -88,6 +90,8 @@ mcpServer:
   username: "test_user"
   password: "test_password"
   storeId: "store_001"
+  transport: "http"        # New in Phase 2.1: 'http' | 'stdio' | 'sse'
+  timeout: 30000          # New in Phase 2.1: Connection timeout in ms
 
 llmConfig:
   temperature: 0.1
@@ -143,13 +147,30 @@ mcp-test-suite/
 - [x] Docker integration preparation
 - [x] Initial project documentation and usage examples
 
-### 🚧 Phase 2: MCP Server Integration (PLANNED)
+### ✅ Phase 2.1: HTTP Transport & MCP Protocol Foundation (COMPLETED)
 
-- [ ] MCP client implementation for GraphQL-API server
+- [x] Multi-Transport MCP Client Implementation with official MCP TypeScript SDK
+- [x] HTTP Transport using StreamableHTTPClientTransport for remote MCP servers
+- [x] Stdio Transport using StdioClientTransport for local MCP server testing
+- [x] MCP Protocol Message Handling with full JSON-RPC 2.0 compliance
+- [x] Initialize handshake, tools discovery, and tool execution
+- [x] Basic Connection Lifecycle Management with state tracking
+- [x] Network Error Handling and Timeouts with configurable settings
+- [x] Updated MCPServerConfig Type with transport field support
+- [x] Comprehensive test suite with 17/18 tests passing
+
+### 🚧 Phase 2.2: Authentication & Session Management (PLANNED)
+
 - [ ] Authentication flow (username/password/store ID)
+- [ ] Session lifecycle management
+- [ ] Authentication state tracking
+- [ ] Implement authenticate(), get_session_info(), and close_session() tools
+
+### 🚧 Phase 2.3: GraphQL Integration (PLANNED)
+
 - [ ] Schema exploration tool integration
 - [ ] Basic GraphQL query execution
-- [ ] Connection error handling
+- [ ] Query optimization and caching
 
 ### 🚧 Phase 3: Thin Client & LLM Integration (PLANNED)
 
@@ -211,14 +232,29 @@ class ConfigManager {
 
 #### `MCPClient`
 
-MCP server integration client.
+MCP server integration client with multi-transport support.
 
 ```typescript
 class MCPClient {
   constructor(config: MCPServerConfig)
-  async authenticate(): Promise<boolean>
-  async exploreSchema(): Promise<any>
-  async executeQuery(query: string, variables?: Record<string, any>): Promise<any>
+  
+  // Core connection management
+  async connect(): Promise<boolean>
+  async disconnect(): Promise<void>
+  async checkConnection(): Promise<boolean>
+  
+  // Tool operations
+  async getAvailableTools(): Promise<string[]>
+  async callTool(toolName: string, parameters?: Record<string, any>): Promise<any>
+  
+  // State management
+  getConnectionState(): MCPConnectionState
+  getToolCallHistory(): MCPToolCall[]
+  clearToolCallHistory(): void
+  
+  // Configuration
+  getConfig(): MCPServerConfig
+  isConnected(): boolean
 }
 ```
 
@@ -234,6 +270,31 @@ interface TestConfig {
   testPrompts?: string[];
   outputDir?: string;
   verbose?: boolean;
+}
+
+interface MCPServerConfig {
+  url: string;
+  username?: string;
+  password?: string;
+  storeId?: string;
+  transport: 'http' | 'stdio' | 'sse';  // New in Phase 2.1
+  timeout?: number;                      // New in Phase 2.1
+}
+
+interface MCPConnectionState {
+  connected: boolean;
+  initialized: boolean;
+  serverInfo?: {
+    name: string;
+    version: string;
+  };
+  capabilities?: {
+    tools?: boolean;
+    resources?: boolean;
+    prompts?: boolean;
+    logging?: boolean;
+  };
+  availableTools?: any[];
 }
 ```
 
@@ -320,4 +381,4 @@ For questions and support, please open an issue on the GitHub repository.
 
 ---
 
-**Note**: This project is currently in Phase 1 (Foundation). Core testing functionality will be implemented in subsequent phases. See the Development Status section for current progress.
+**Note**: This project has completed Phase 1 (Foundation) and Phase 2.1 (HTTP Transport & MCP Protocol Foundation). The MCP client now supports multi-transport connections with full protocol compliance. Core testing functionality will be implemented in subsequent phases. See the Development Status section for current progress.
