@@ -169,22 +169,11 @@ mcp-test-suite/
 - [x] Tool availability refresh after authentication state changes
 - [x] Comprehensive test suite with 13 additional tests (41/41 total tests passing)
 
-### ✅ Phase 2.3: Schema Exploration Tools (COMPLETED)
+### 🚧 Phase 2.3: GraphQL Integration (PLANNED)
 
-- [x] Schema exploration tool implementation with exploreSchema() method
-- [x] Schema search functionality with searchSchema() method
-- [x] Support for both single and multiple item exploration
-- [x] Agent-like behavior with raw MCP server response handling
-- [x] Parameter validation with descriptive error messages
-- [x] Integration with existing tool call tracking and error handling
-- [x] Comprehensive test suite with 13 additional tests (54/54 total tests passing)
-
-### 🚧 Phase 2.4: GraphQL Query Execution (PLANNED)
-
-- [ ] GraphQL query execution with query_graphql tool
-- [ ] Query validation and error handling
-- [ ] Support for query variables
-- [ ] Mutation blocking (read-only enforcement)
+- [ ] Schema exploration tool integration
+- [ ] Basic GraphQL query execution
+- [ ] Query optimization and caching
 
 ### 🚧 Phase 3: Thin Client & LLM Integration (PLANNED)
 

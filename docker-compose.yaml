@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    container_name: mcpo
+    ports:
+      - "8765:8765"
+    command: [
+      "--host", "0.0.0.0",
+      "--port", "8765",
+      "--server-type", "streamable-http",
+      "--", "https://ai.itrackenterprise.com/mcp"
+    ]
+    restart: unless-stopped
+    networks:
+      - webui-network
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "3002:8080"
+    environment:
+      - MCP_SERVERS=[{"name":"enterprise-remote","url":"ws://mcpo:8765","disabled":false}]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui:/app/backend/data
+    restart: unless-stopped
+    depends_on:
+      - mcpo
+    networks:
+      - webui-network
+
+volumes:
+  open-webui:
+
+networks:
+  webui-network:
+    driver: bridge

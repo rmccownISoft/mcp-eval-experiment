@@ -1,0 +1,9 @@
+{
+    "mcpServers": {
+        "enterprise-remote": {
+            "url": "https://ai.itrackenterprise.com",
+            "type": "streamable-http"
+            
+        }
+    } 
+}
