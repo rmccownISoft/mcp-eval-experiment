@@ -1,402 +1,263 @@
-# MCP Test Suite
+# MCP Test Suite - Enterprise API MCP Client
 
-A comprehensive TypeScript test suite to evaluate GraphQL-API MCP (Model Context Protocol) server effectiveness for AI agents.
+A comprehensive TypeScript test suite and MCP client for evaluating the effectiveness of GraphQL-API MCP (Model Context Protocol) servers for AI agents.
 
-## Overview
+## 🚀 Complete MCP Client Refactor
 
-The MCP Test Suite is designed to test and evaluate the performance of AI agents when interacting with a heavy truck salvage yard ERP system through a GraphQL-API MCP server. It provides comprehensive metrics on tool usage efficiency, response accuracy, reasoning quality, and hallucination detection.
+This project has been completely refactored based on the actual Enterprise API MCP Server specification. The new implementation provides a robust, production-ready MCP client that supports all 9 tools from the actual server.
 
-## Features
+## ✨ Features
 
-- **Multi-LLM Support**: Test with Claude, Gemini, and ChatGPT
-- **Comprehensive Metrics**: Tool call efficiency, latency, accuracy, and reasoning quality
-- **Flexible Configuration**: YAML/JSON config files and environment variables
-- **Library & CLI**: Use as a library or standalone CLI tool
-- **Docker Integration**: Built-in Docker environment management
-- **Detailed Reporting**: JSON, CSV, and HTML report generation
+### 🔌 **Complete MCP Client Implementation**
+- **All 9 Server Tools**: Full implementation of every tool from the Enterprise API MCP Server
+- **Dual Transport Support**: Both STDIO and Streamable HTTP transports
+- **Proper Authentication**: Complete authentication workflow with session management
+- **Schema Exploration**: Full GraphQL schema introspection and search capabilities
+- **GraphQL Queries**: Execute queries with variables and mutation blocking
+- **Error Handling**: Comprehensive error handling with server-specific error detection
 
-## Installation
+### 🛠️ **Supported MCP Tools**
+
+1. **`get_session_info()`** - Get session ID and authentication status
+2. **`get_current_date()`** - Get current date in YYYY-MM-DD format
+3. **`authenticate(username, password, storeId)`** - Login to the enterprise API
+4. **`close_session()`** - Close session and re-enable authenticate tool
+5. **`get_server_information_query()`** - Get schema and release version info
+6. **`quick_reference()`** - Get business context guide for ITrack Enterprise
+7. **`explore_schema(type, items?)`** - Introspect GraphQL schema with proper enum validation
+8. **`search_schema(keyword)`** - Search schema items by keyword
+9. **`query_graphql(query, variables?)`** - Execute GraphQL queries with variables
+
+### 🔧 **Technical Improvements**
+
+- **Correct Parameter Types**: `storeId` as number, proper `SchemaType` enum validation
+- **Server Error Detection**: Handles `isError: true` responses from server
+- **Response Parsing**: Extracts text content from MCP responses correctly
+- **Tool Call Tracking**: Comprehensive metrics tracking for performance analysis
+- **Session Management**: Proper session ID tracking and authentication state
+- **Validation**: Parameter validation before server calls to prevent unnecessary requests
+
+## 📦 Installation
 
 ```bash
-# Install dependencies
 npm install
-
-# Build the project
-npm run build
-
-# Install globally (optional)
-npm install -g .
 ```
 
-## Quick Start
+## 🏃‍♂️ Quick Start
 
-### CLI Usage
-
-```bash
-# Run tests with Claude
-npx mcp-test-suite run --llm claude --config ./config/example.yaml
-
-# Validate configuration
-npx mcp-test-suite validate --config ./config/example.yaml
-
-# Initialize new configuration
-npx mcp-test-suite init --format yaml --output ./my-config.yaml
-
-# Docker management
-npx mcp-test-suite docker --start
-```
-
-### Library Usage
+### Basic Usage
 
 ```typescript
-import { MCPTestSuite, LLMProvider, loadConfig } from 'mcp-test-suite';
+import { MCPClient } from './src/lib/mcp/MCPClient.js';
 
-// Direct configuration
-const testSuite = new MCPTestSuite({
-  llmProvider: LLMProvider.CLAUDE,
-  mcpServer: {
-    url: 'http://localhost:3000',
-    username: 'test_user',
-    password: 'test_password',
-    transport: 'http',      // New in Phase 2.1
-    timeout: 30000         // New in Phase 2.1
+// Configure for HTTP transport (recommended)
+const client = new MCPClient({
+  transport: 'http',
+  url: 'http://localhost:3000',
+  env: {
+    HOST_ADDR: 'https://ai.itrackenterprise.com/graphql'
   },
-  apiKeys: {
-    claude: 'sk-ant-api03-...'
-  },
-  outputDir: './results'
+  username: 'ai',
+  password: 'demo',
+  storeId: 1
 });
 
-// Run tests
-const results = await testSuite.runTests();
-console.log(`Completed ${results.totalTests} tests`);
+// Connect and authenticate
+await client.connect();
+const success = await client.authenticate('ai', 'demo', 1);
+
+if (success) {
+  // Use all 9 tools
+  const sessionInfo = await client.getSessionInfo();
+  const currentDate = await client.getCurrentDate();
+  const serverInfo = await client.getServerInformationQuery();
+  const quickRef = await client.getQuickReference();
+  
+  // Schema exploration
+  const types = await client.exploreSchema('type');
+  const searchResults = await client.searchSchema('Customer');
+  
+  // GraphQL queries
+  const stores = await client.queryGraphQL(`
+    query {
+      storesForLogin {
+        id
+        name
+      }
+    }
+  `);
+  
+  // Close session when done
+  await client.closeSession();
+}
+
+await client.disconnect();
 ```
 
-## Configuration
+### STDIO Transport
 
-### YAML Configuration
-
-```yaml
-# config/test-config.yaml
-llmProvider: claude
-
-apiKeys:
-  claude: "sk-ant-api03-..."
-  gemini: "AIza..."
-  chatgpt: "sk-..."
-
-mcpServer:
-  url: "http://localhost:3000"
-  username: "test_user"
-  password: "test_password"
-  storeId: "store_001"
-  transport: "http"        # New in Phase 2.1: 'http' | 'stdio' | 'sse'
-  timeout: 30000          # New in Phase 2.1: Connection timeout in ms
-
-llmConfig:
-  temperature: 0.1
-  maxTokens: 4000
-  timeout: 30000
-
-outputDir: "./results"
-verbose: true
+```typescript
+const client = new MCPClient({
+  transport: 'stdio',
+  command: 'node',
+  args: ['-r', 'dotenv/config', 'dist/entryPoint.js'],
+  cwd: '/path/to/enterprise-api-mcp-server',
+  env: {
+    HOST_ADDR: 'https://ai.itrackenterprise.com/graphql'
+  }
+});
 ```
+
+## 🧪 Testing
+
+The project includes comprehensive test suites:
+
+```bash
+# Run all tests
+npm test
+
+# Build project
+npm run build
+
+# Run demo
+npm run build && node dist/examples/mcp-client-demo.js
+```
+
+### Test Coverage
+
+- **68 Tests Total** - All passing ✅
+- **Integration Tests** - Complete MCP client functionality
+- **Unit Tests** - Individual component testing
+- **Error Handling** - Comprehensive error scenario testing
+- **Type Safety** - TypeScript compilation and type checking
+
+## 📋 Server Requirements
+
+To use this MCP client, you need the Enterprise API MCP Server running:
+
+### HTTP Transport (Recommended)
+```bash
+# Start the MCP server on port 3000
+HOST_ADDR=https://ai.itrackenterprise.com/graphql node -r dotenv/config dist/entryPoint.js
+```
+
+### STDIO Transport
+```bash
+# The client will spawn the server process automatically
+# Just ensure the server is built and available at the specified path
+```
+
+## 🔧 Configuration
 
 ### Environment Variables
 
-```bash
-export MCP_LLM_PROVIDER=claude
-export CLAUDE_API_KEY=sk-ant-api03-...
-export MCP_SERVER_URL=http://localhost:3000
-export MCP_USERNAME=test_user
-export MCP_PASSWORD=test_password
-export MCP_OUTPUT_DIR=./results
-```
+- **`HOST_ADDR`** (required): GraphQL endpoint URL
+- **`API_KEY`** (optional): Pre-configured API key
+- **`DEBUG_LOG`** (optional): Enable debug logging
 
-## Project Structure
+### Test Credentials
 
-```
-mcp-test-suite/
-├── src/
-│   ├── lib/                    # Library core
-│   │   ├── clients/           # LLM client implementations
-│   │   │   ├── base/          # Base conversation client
-│   │   │   └── providers/     # LLM provider plugins
-│   │   ├── config/            # Configuration management
-│   │   ├── mcp/              # MCP server integration
-│   │   ├── scoring/          # Evaluation and scoring
-│   │   ├── testing/          # Test execution engine
-│   │   ├── reporting/        # Report generation
-│   │   └── types.ts          # Type definitions
-│   ├── cli/                   # CLI interface
-│   └── index.ts              # Library exports
-├── config/                   # Configuration examples
-├── examples/                 # Usage examples
-├── test-prompts/            # Test prompt definitions
-└── results/                 # Generated reports
-```
+- **Username**: `ai`
+- **Password**: `demo`
+- **Store ID**: `1`
 
-## Development Status
+## 📊 Performance Tracking
 
-### ✅ Phase 1: Project Foundation & Library Architecture (COMPLETED)
-
-- [x] TypeScript project setup with library configuration
-- [x] Configuration system for API keys, test parameters, and MCP server connection
-- [x] Library export structure and public API design
-- [x] Basic CLI interface structure
-- [x] Docker integration preparation
-- [x] Initial project documentation and usage examples
-
-### ✅ Phase 2.1: HTTP Transport & MCP Protocol Foundation (COMPLETED)
-
-- [x] Multi-Transport MCP Client Implementation with official MCP TypeScript SDK
-- [x] HTTP Transport using StreamableHTTPClientTransport for remote MCP servers
-- [x] Stdio Transport using StdioClientTransport for local MCP server testing
-- [x] MCP Protocol Message Handling with full JSON-RPC 2.0 compliance
-- [x] Initialize handshake, tools discovery, and tool execution
-- [x] Basic Connection Lifecycle Management with state tracking
-- [x] Network Error Handling and Timeouts with configurable settings
-- [x] Updated MCPServerConfig Type with transport field support
-- [x] Comprehensive test suite with 17/18 tests passing
-
-### ✅ Phase 2.2: Authentication & Session Management (COMPLETED)
-
-- [x] Authentication flow implementation with authenticateUser() method
-- [x] Session lifecycle management with getSessionInfo() and closeSession()
-- [x] Authentication state tracking with persistent state across tool calls
-- [x] Session information tracking (username, storeId, loginTime)
-- [x] Authentication error handling and state recovery
-- [x] Tool availability refresh after authentication state changes
-- [x] Comprehensive test suite with 13 additional tests (41/41 total tests passing)
-
-### 🚧 Phase 2.3: GraphQL Integration (PLANNED)
-
-- [ ] Schema exploration tool integration
-- [ ] Basic GraphQL query execution
-- [ ] Query optimization and caching
-
-### 🚧 Phase 3: Thin Client & LLM Integration (PLANNED)
-
-- [ ] Thin client architecture with pluggable LLM providers
-- [ ] LLM provider plugins (Claude, Gemini, ChatGPT)
-- [ ] Conversation state management
-- [ ] Token usage tracking and latency measurement
-
-### 🚧 Phase 4: Test Prompt Execution Engine (PLANNED)
-
-- [ ] Test prompt loader and manager
-- [ ] Sequential test execution system
-- [ ] MCP tool call tracking
-- [ ] Raw query/response data capture
-
-### 🚧 Phase 5: Scoring and Evaluation System (PLANNED)
-
-- [ ] GPT-4 integration for response evaluation
-- [ ] Scoring algorithms for all metrics
-- [ ] Data validation system (hallucination detection)
-- [ ] Comparative analysis engine
-
-### 🚧 Phase 6: Reporting and Output (PLANNED)
-
-- [ ] Comprehensive report generation
-- [ ] Benchmark file output
-- [ ] Performance visualization
-- [ ] Final documentation
-
-## API Reference
-
-### Core Classes
-
-#### `MCPTestSuite`
-
-Main test suite orchestrator.
+The client includes comprehensive performance tracking:
 
 ```typescript
-class MCPTestSuite {
-  constructor(config: TestConfig | ConfigManager)
-  async runTests(testIds?: string[]): Promise<TestSuiteResult>
-  async runSingleTest(testId: string): Promise<TestResult>
-  async validateEnvironment(): Promise<{valid: boolean, issues: string[]}>
-}
+// Get tool call history
+const history = client.getToolCallHistory();
+console.log('Total tool calls:', history.length);
+console.log('Average latency:', 
+  history.reduce((sum, call) => sum + call.duration, 0) / history.length
+);
+
+// Clear history
+client.clearToolCallHistory();
 ```
 
-#### `ConfigManager`
+## 🔍 Error Handling
 
-Configuration management and validation.
+The client provides detailed error handling:
 
 ```typescript
-class ConfigManager {
-  static fromFile(filePath: string): ConfigManager
-  static fromEnvironment(): ConfigManager
-  getConfig(): TestConfig
-  updateConfig(updates: Partial<TestConfig>): void
+try {
+  await client.authenticate('user', 'pass', 1);
+} catch (error) {
+  if (error instanceof MCPServerError) {
+    console.error('MCP Error:', error.message);
+    console.error('Details:', error.details);
+  }
 }
 ```
 
-#### `MCPClient`
+## 🏗️ Architecture
 
-MCP server integration client with multi-transport support and authentication.
+### Project Structure
 
-```typescript
-class MCPClient {
-  constructor(config: MCPServerConfig)
-  
-  // Core connection management
-  async connect(): Promise<boolean>
-  async disconnect(): Promise<void>
-  async checkConnection(): Promise<boolean>
-  
-  // Tool operations
-  async getAvailableTools(): Promise<string[]>
-  async callTool(toolName: string, parameters?: Record<string, any>): Promise<any>
-  
-  // Authentication & Session Management (Phase 2.2)
-  async authenticateUser(username: string, password: string, selectedStoreId: string): Promise<boolean>
-  async getSessionInfo(): Promise<any>
-  async closeSession(): Promise<boolean>
-  isUserAuthenticated(): boolean
-  getCurrentSession(): MCPConnectionState['sessionInfo']
-  
-  // State management
-  getConnectionState(): MCPConnectionState
-  getToolCallHistory(): MCPToolCall[]
-  clearToolCallHistory(): void
-  
-  // Configuration
-  getConfig(): MCPServerConfig
-  isConnected(): boolean
-}
+```
+src/lib/mcp/
+├── MCPClient.ts           # Complete MCP client implementation
+└── types exported via     # TypeScript interfaces
+    ../types.ts
+
+examples/
+├── mcp-client-demo.ts     # Comprehensive usage examples
+
+tests/
+├── mcp-client-integration.test.ts  # Integration tests
+├── phase02.1.test.ts              # Transport & protocol tests
+├── phase02.2.test.ts              # Authentication tests
+└── phase02.3.test.ts              # Schema exploration tests
 ```
 
-### Configuration Types
+### Key Classes
 
-```typescript
-interface TestConfig {
-  llmProvider: LLMProvider;
-  mcpServer: MCPServerConfig;
-  apiKeys: APIKeys;
-  llmConfig?: LLMConfig;
-  docker?: DockerConfig;
-  testPrompts?: string[];
-  outputDir?: string;
-  verbose?: boolean;
-}
+- **`MCPClient`** - Main client class with all 9 tool implementations
+- **`MCPServerError`** - Custom error class for MCP-specific errors
+- **`MCPConnectionState`** - Connection and authentication state tracking
+- **`MCPToolCall`** - Tool call metrics and tracking
 
-interface MCPServerConfig {
-  url: string;
-  username?: string;
-  password?: string;
-  storeId?: string;
-  transport: 'http' | 'stdio' | 'sse';  // New in Phase 2.1
-  timeout?: number;                      // New in Phase 2.1
-}
+## 🔄 Migration from Previous Version
 
-interface MCPConnectionState {
-  connected: boolean;
-  initialized: boolean;
-  authenticated: boolean;                    // New in Phase 2.2
-  serverInfo?: {
-    name: string;
-    version: string;
-  };
-  capabilities?: {
-    tools?: boolean;
-    resources?: boolean;
-    prompts?: boolean;
-    logging?: boolean;
-  };
-  availableTools?: any[];
-  sessionInfo?: {                           // New in Phase 2.2
-    username?: string;
-    storeId?: string;
-    sessionId?: string;
-    loginTime?: Date;
-  };
-  authenticationError?: string;             // New in Phase 2.2
-}
-```
+The client has been completely rewritten. Key changes:
 
-## Testing
+### Method Name Changes
+- `authenticateUser()` → `authenticate()`
+- `isUserAuthenticated()` → `isAuthenticated()`
+- Parameter types corrected (storeId now number, not string)
 
-```bash
-# Run unit tests
-npm test
+### New Methods
+- `getCurrentDate()` - Get current date
+- `getServerInformationQuery()` - Get server info
+- `getQuickReference()` - Get business context
+- `queryGraphQL()` - Execute GraphQL queries
 
-# Run tests in development mode
-npm run test:dev
+### Improved Error Handling
+- Server error detection with `isError: true` flag
+- Better parameter validation
+- More descriptive error messages
 
-# Build and test
-npm run build && npm test
-```
-
-## CLI Commands
-
-### `run`
-Execute the MCP test suite.
-
-```bash
-mcp-test-suite run [options]
-
-Options:
-  -c, --config <path>           Configuration file path
-  -l, --llm <provider>          LLM provider (claude|gemini|chatgpt)
-  -s, --server <url>            MCP server URL
-  -o, --output <dir>            Output directory
-  -v, --verbose                 Enable verbose logging
-  --docker-container <name>     Docker container name
-  --docker-port <port>          Docker port
-```
-
-### `validate`
-Validate configuration without running tests.
-
-```bash
-mcp-test-suite validate [options]
-
-Options:
-  -c, --config <path>           Configuration file path
-```
-
-### `init`
-Initialize a new configuration file.
-
-```bash
-mcp-test-suite init [options]
-
-Options:
-  -f, --format <format>         Format (json|yaml)
-  -o, --output <path>           Output file path
-```
-
-### `docker`
-Docker environment management.
-
-```bash
-mcp-test-suite docker [options]
-
-Options:
-  --start                       Start Docker environment
-  --stop                        Stop Docker environment
-  --status                      Check Docker status
-  --container <name>            Container name
-```
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Run tests: `npm test`
+5. Submit a pull request
 
-## License
+## 📄 License
 
-ISC License - see LICENSE file for details.
+ISC License
 
-## Support
+## 🔗 Related Projects
 
-For questions and support, please open an issue on the GitHub repository.
+- [Enterprise API MCP Server](https://github.com/ISoft-Data-Systems/enterprise-api-mcp)
+- [Model Context Protocol](https://modelcontextprotocol.io/)
 
 ---
 
-**Note**: This project has completed Phase 1 (Foundation), Phase 2.1 (HTTP Transport & MCP Protocol Foundation), and Phase 2.2 (Authentication & Session Management). The MCP client now supports multi-transport connections with full protocol compliance and comprehensive authentication capabilities. Core testing functionality will be implemented in subsequent phases. See the Development Status section for current progress.
+**Ready to test your MCP server with AI agents!** 🚀
+
+This refactored client provides a solid foundation for testing AI agent interactions with GraphQL APIs through the Model Context Protocol.
