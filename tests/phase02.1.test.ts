@@ -167,12 +167,12 @@ test('Phase 2.1: MCPClient legacy methods show deprecation warnings', async () =
   try {
     // Test deprecated methods
     client.isAuthenticated();
-    await client.exploreSchema();
+    await client.legacyExploreSchema();
     await client.executeQuery('test query');
     
     // Verify deprecation warnings were shown
     assert.ok(warnings.some(w => w.includes('isAuthenticated() is deprecated')));
-    assert.ok(warnings.some(w => w.includes('exploreSchema() is deprecated')));
+    assert.ok(warnings.some(w => w.includes('legacyExploreSchema() is deprecated')));
     assert.ok(warnings.some(w => w.includes('executeQuery() is deprecated')));
   } finally {
     console.warn = originalWarn;

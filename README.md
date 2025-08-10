@@ -159,18 +159,32 @@ mcp-test-suite/
 - [x] Updated MCPServerConfig Type with transport field support
 - [x] Comprehensive test suite with 17/18 tests passing
 
-### 🚧 Phase 2.2: Authentication & Session Management (PLANNED)
+### ✅ Phase 2.2: Authentication & Session Management (COMPLETED)
 
-- [ ] Authentication flow (username/password/store ID)
-- [ ] Session lifecycle management
-- [ ] Authentication state tracking
-- [ ] Implement authenticate(), get_session_info(), and close_session() tools
+- [x] Authentication flow implementation with authenticateUser() method
+- [x] Session lifecycle management with getSessionInfo() and closeSession()
+- [x] Authentication state tracking with persistent state across tool calls
+- [x] Session information tracking (username, storeId, loginTime)
+- [x] Authentication error handling and state recovery
+- [x] Tool availability refresh after authentication state changes
+- [x] Comprehensive test suite with 13 additional tests (41/41 total tests passing)
 
-### 🚧 Phase 2.3: GraphQL Integration (PLANNED)
+### ✅ Phase 2.3: Schema Exploration Tools (COMPLETED)
 
-- [ ] Schema exploration tool integration
-- [ ] Basic GraphQL query execution
-- [ ] Query optimization and caching
+- [x] Schema exploration tool implementation with exploreSchema() method
+- [x] Schema search functionality with searchSchema() method
+- [x] Support for both single and multiple item exploration
+- [x] Agent-like behavior with raw MCP server response handling
+- [x] Parameter validation with descriptive error messages
+- [x] Integration with existing tool call tracking and error handling
+- [x] Comprehensive test suite with 13 additional tests (54/54 total tests passing)
+
+### 🚧 Phase 2.4: GraphQL Query Execution (PLANNED)
+
+- [ ] GraphQL query execution with query_graphql tool
+- [ ] Query validation and error handling
+- [ ] Support for query variables
+- [ ] Mutation blocking (read-only enforcement)
 
 ### 🚧 Phase 3: Thin Client & LLM Integration (PLANNED)
 
@@ -232,7 +246,7 @@ class ConfigManager {
 
 #### `MCPClient`
 
-MCP server integration client with multi-transport support.
+MCP server integration client with multi-transport support and authentication.
 
 ```typescript
 class MCPClient {
@@ -246,6 +260,13 @@ class MCPClient {
   // Tool operations
   async getAvailableTools(): Promise<string[]>
   async callTool(toolName: string, parameters?: Record<string, any>): Promise<any>
+  
+  // Authentication & Session Management (Phase 2.2)
+  async authenticateUser(username: string, password: string, selectedStoreId: string): Promise<boolean>
+  async getSessionInfo(): Promise<any>
+  async closeSession(): Promise<boolean>
+  isUserAuthenticated(): boolean
+  getCurrentSession(): MCPConnectionState['sessionInfo']
   
   // State management
   getConnectionState(): MCPConnectionState
@@ -284,6 +305,7 @@ interface MCPServerConfig {
 interface MCPConnectionState {
   connected: boolean;
   initialized: boolean;
+  authenticated: boolean;                    // New in Phase 2.2
   serverInfo?: {
     name: string;
     version: string;
@@ -295,6 +317,13 @@ interface MCPConnectionState {
     logging?: boolean;
   };
   availableTools?: any[];
+  sessionInfo?: {                           // New in Phase 2.2
+    username?: string;
+    storeId?: string;
+    sessionId?: string;
+    loginTime?: Date;
+  };
+  authenticationError?: string;             // New in Phase 2.2
 }
 ```
 
@@ -381,4 +410,4 @@ For questions and support, please open an issue on the GitHub repository.
 
 ---
 
-**Note**: This project has completed Phase 1 (Foundation) and Phase 2.1 (HTTP Transport & MCP Protocol Foundation). The MCP client now supports multi-transport connections with full protocol compliance. Core testing functionality will be implemented in subsequent phases. See the Development Status section for current progress.
+**Note**: This project has completed Phase 1 (Foundation), Phase 2.1 (HTTP Transport & MCP Protocol Foundation), and Phase 2.2 (Authentication & Session Management). The MCP client now supports multi-transport connections with full protocol compliance and comprehensive authentication capabilities. Core testing functionality will be implemented in subsequent phases. See the Development Status section for current progress.
