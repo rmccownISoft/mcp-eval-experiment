@@ -51,6 +51,14 @@ Create a comprehensive TypeScript test suite to evaluate the effectiveness of a 
 ## Project Phases
 **IMPORTANT**: Complete each phase as a standalone unit. Test thoroughly and verify functionality before proceeding. Update this specification document as you progress through each phase.
 
+**Phase 3 Implementation Strategy**: Based on lessons learned from Phase 2, Phase 3 will focus on single-model integration (Claude) first, rather than attempting to implement all three models simultaneously. This approach provides:
+- **Faster Time to Value**: Get automated testing working with one model quickly
+- **Architecture Validation**: Prove the design works before scaling to multiple models  
+- **Risk Reduction**: Identify and solve integration challenges with one model before expanding
+- **Foundation for Expansion**: Create solid patterns that can be replicated for other models
+
+**Detailed Phase 3 Specification**: See `documentation/single-model-integration.md` for comprehensive implementation details, test cases, technical challenges, and success criteria for the Claude-focused approach.
+
 ### Phase 1: Project Foundation & Library Architecture
 **Deliverables**:
 - TypeScript project setup with library configuration (package.json exports, typings)
@@ -121,62 +129,87 @@ Create a comprehensive TypeScript test suite to evaluate the effectiveness of a 
 
 **Ready for Phase 3**: The MCP client is now production-ready and provides a solid foundation for AI agent integration. All server tools are functional, tested, and documented.
 
-### Phase 3: Thin Client & LLM Integration
+### Phase 3: Single Model Integration (Claude Focus)
 **Deliverables**:
-- **Thin Client Architecture**: Base conversation client with pluggable LLM providers
-- **LLM Provider Plugins**: Separate modules for Claude, Gemini, and ChatGPT APIs
-- **Conversation State Manager**: Track message history, context, and session state
-- **Configurable LLM Selection**: Runtime LLM switching based on configuration
-- **Rate Limiting & Error Handling**: Robust API interaction management
-- Token usage tracking and latency measurement
+- **Claude Adapter**: Direct integration with Anthropic's Claude API for automated MCP tool usage
+- **Test Orchestrator**: Coordinate between MCP client and Claude for seamless tool execution
+- **Basic Metrics Collection**: Track tool usage patterns, accuracy, and performance for Claude
+- **Test Framework Foundation**: Establish testing patterns that can be extended to other models
+- **Comprehensive Test Cases**: Single-tool, multi-tool, and complex workflow test scenarios
+- **Authentication State Management**: Handle tool availability changes during login/logout flows
+- **Response Quality Scoring**: Evaluate Claude's tool selection, parameter accuracy, and response completeness
+
+**Architecture Design for Future Expansion**:
+- **Model Adapter Interface**: Define standard interface that future models (Gemini, ChatGPT) can implement
+- **Pluggable Architecture**: Design system to easily add new model adapters without core changes
+- **Standardized Metrics**: Create metrics framework that works consistently across all future models
+- **Configuration System**: Support for model-specific settings and API credentials
 
 **Testing Criteria**:
-- All three LLM providers work through the thin client interface
-- Conversation state is maintained correctly across multi-turn interactions
-- LLM can be switched via configuration without code changes
-- Token usage and response times are accurately tracked
-- API errors and rate limits are handled gracefully
+- Claude successfully calls all 9 MCP server tools through natural language prompts
+- 90%+ success rate on basic single-tool test cases
+- 80%+ success rate on multi-tool workflow test cases
+- Proper handling of authentication state changes and tool availability
+- Metrics collection captures key performance indicators (tool calls, latency, accuracy, token usage)
+- Architecture ready for Phase 4 expansion to multiple models
 - Library exports work correctly for external integration
 
-### Phase 4: Test Prompt Execution Engine
+**Key Focus Areas**:
+- **Tool Format Translation**: Convert MCP tool definitions to Claude's expected format
+- **Context Management**: Maintain conversation context and previous tool call results
+- **Error Handling**: Robust handling of API limits, tool failures, and authentication issues
+- **Performance Optimization**: Minimize unnecessary tool calls and optimize response times
+- **Quality Validation**: Ensure Claude correctly interprets tool outputs and provides accurate responses
+
+### Phase 4: Multi-Model Integration & Comparison
 **Deliverables**:
-- Test prompt loader and manager
-- Sequential test execution system
-- MCP tool call tracking
-- Raw query/response data capture
-- Comprehensive logging system
+- **Additional Model Adapters**: Implement Gemini and ChatGPT providers using Phase 3 architecture
+- **Model Comparison Engine**: Run identical test cases across all models for comparative analysis
+- **Cross-Model Metrics**: Standardized scoring that enables fair comparison between models
+- **Performance Benchmarking**: Comparative analysis of speed, accuracy, and efficiency across models
+- **Model Selection Recommendations**: Data-driven insights on which models perform best for different task types
 
 **Testing Criteria**:
-- All test prompts execute successfully
-- MCP tool calls are accurately counted
-- GraphQL responses are captured correctly
-- Logs provide sufficient detail for debugging
+- All three models (Claude, Gemini, ChatGPT) work through the unified interface
+- Identical test cases run successfully across all models
+- Comparative metrics provide meaningful insights into model strengths/weaknesses
+- Model switching works seamlessly via configuration
+- Performance benchmarks are consistent and reliable
 
-### Phase 5: Scoring and Evaluation System
+### Phase 5: Advanced Test Scenarios & Prompt Execution
 **Deliverables**:
-- GPT-4 integration for response evaluation
-- Scoring algorithms for all metrics (tool calls, latency, reasoning, accuracy)
-- Data validation system (hallucination detection)
-- Comparative analysis engine
+- **Complex Test Scenarios**: Multi-step reasoning tasks and business workflow simulations
+- **Test Prompt Library**: Comprehensive collection of test cases covering various complexity levels
+- **Sequential Test Execution**: Automated execution of full test suites across all models
+- **Advanced Metrics**: Semantic similarity scoring, hallucination detection, reasoning quality assessment
+- **Comprehensive Logging**: Detailed traceability of tool calls, API interactions, and decision paths
 
 **Testing Criteria**:
-- GPT-4 scoring produces consistent, reasonable results
-- Hallucination detection works correctly
-- All metrics are calculated accurately
-- Comparative analysis provides meaningful insights
+- Complex multi-step scenarios execute successfully across all models
+- Advanced metrics provide deeper insights into model capabilities
+- Test execution is fully automated and reliable
+- Logging provides sufficient detail for debugging and analysis
 
-### Phase 6: Reporting and Output
+### Phase 6: Advanced Evaluation & Reporting
 **Deliverables**:
-- Comprehensive report generation
-- Benchmark file output
-- Performance visualization (if applicable)
-- Final documentation and usage instructions
+- **GPT-4 Integration**: Use GPT-4 for sophisticated response quality evaluation
+- **Advanced Scoring Algorithms**: Comprehensive metrics for tool efficiency, reasoning quality, and accuracy
+- **Hallucination Detection**: Automated detection of AI-generated data not present in actual API responses
+- **Comparative Analysis Engine**: Statistical analysis and visualization of model performance differences
+- **Comprehensive Reporting**: Detailed reports with actionable insights and recommendations
 
 **Testing Criteria**:
-- Reports contain all required metrics
-- Benchmark files are properly formatted and saved
-- Documentation is complete and accurate
-- End-to-end system test passes
+- GPT-4 scoring produces consistent, reasonable results across all models
+- Hallucination detection accurately identifies fabricated data
+- All metrics are calculated accurately and provide meaningful insights
+- Comparative analysis reveals clear model strengths and weaknesses
+- Reports are comprehensive, actionable, and well-formatted
+
+**Key Deliverables**:
+- **Performance Benchmarks**: Standardized metrics for tool call efficiency, response latency, and accuracy
+- **Model Recommendation Engine**: Data-driven recommendations for optimal model selection by task type
+- **Quality Assurance Reports**: Detailed analysis of response accuracy and hallucination rates
+- **Business Impact Analysis**: Insights into how different models perform on real-world salvage yard scenarios
 
 ## Technical Specifications
 
