@@ -1,12 +1,11 @@
 /**
  * Phase 2.1 HTTP Transport & MCP Protocol Foundation Tests
- * Tests the MCP client HTTP transport and basic protocol functionality
+ * Updated for the refactored MCP client based on actual server specification
  */
 
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { MCPClient, MCPConnectionState } from '../src/lib/mcp/MCPClient.js';
-import { MCPServerConfig, MCPServerError } from '../src/lib/types.js';
+import { MCPClient, MCPServerError, type MCPServerConfig } from '../src/lib/mcp/MCPClient.js';
 
 test('Phase 2.1: MCPClient can be instantiated with HTTP transport config', () => {
   const config: MCPServerConfig = {
@@ -26,7 +25,6 @@ test('Phase 2.1: MCPClient can be instantiated with HTTP transport config', () =
 
 test('Phase 2.1: MCPClient can be instantiated with stdio transport config', () => {
   const config: MCPServerConfig = {
-    url: 'stdio://mcp-server',
     transport: 'stdio',
     command: 'node',
     args: ['server.js']
@@ -43,7 +41,6 @@ test('Phase 2.1: MCPClient can be instantiated with stdio transport config', () 
 
 test('Phase 2.1: MCPClient requires command for stdio transport', () => {
   const config: MCPServerConfig = {
-    url: 'stdio://mcp-server',
     transport: 'stdio'
     // Missing command
   };
@@ -59,7 +56,7 @@ test('Phase 2.1: MCPClient requires command for stdio transport', () => {
 test('Phase 2.1: MCPClient rejects unsupported transport types', () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
-    transport: 'sse' as any, // Force unsupported transport (sse is deprecated)
+    transport: 'sse' as any, // Force unsupported transport
     timeout: 30000
   };
 
@@ -124,7 +121,7 @@ test('Phase 2.1: MCPClient throws error when calling tools before connection', a
   
   // Should throw error when trying to call tools without connection
   await assert.rejects(async () => {
-    await client.callTool('test-tool', {});
+    await client.getSessionInfo();
   }, MCPServerError);
   
   await assert.rejects(async () => {
@@ -139,44 +136,17 @@ test('Phase 2.1: MCPClient connection state interface is properly typed', () => 
   };
 
   const client = new MCPClient(config);
-  const connectionState: MCPConnectionState = client.getConnectionState();
+  const connectionState = client.getConnectionState();
   
   // Verify all required properties exist
   assert.equal(typeof connectionState.connected, 'boolean');
   assert.equal(typeof connectionState.initialized, 'boolean');
+  assert.equal(typeof connectionState.authenticated, 'boolean');
   
   // Optional properties should be undefined initially
   assert.equal(connectionState.serverInfo, undefined);
   assert.equal(connectionState.capabilities, undefined);
   assert.equal(connectionState.availableTools, undefined);
-});
-
-test('Phase 2.1: MCPClient legacy methods show deprecation warnings', async () => {
-  const config: MCPServerConfig = {
-    url: 'http://localhost:3000',
-    transport: 'http'
-  };
-
-  const client = new MCPClient(config);
-  
-  // Capture console warnings
-  const originalWarn = console.warn;
-  const warnings: string[] = [];
-  console.warn = (message: string) => warnings.push(message);
-  
-  try {
-    // Test deprecated methods
-    client.isAuthenticated();
-    await client.legacyExploreSchema();
-    await client.executeQuery('test query');
-    
-    // Verify deprecation warnings were shown
-    assert.ok(warnings.some(w => w.includes('isAuthenticated() is deprecated')));
-    assert.ok(warnings.some(w => w.includes('legacyExploreSchema() is deprecated')));
-    assert.ok(warnings.some(w => w.includes('executeQuery() is deprecated')));
-  } finally {
-    console.warn = originalWarn;
-  }
 });
 
 test('Phase 2.1: MCPClient handles network timeouts and errors gracefully', async () => {

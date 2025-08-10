@@ -1,12 +1,11 @@
 /**
  * Phase 2.3 Schema Exploration Tools Tests
- * Tests the MCP client schema exploration functionality
+ * Updated for the refactored MCP client based on actual server specification
  */
 
 import { test } from 'node:test';
 import { strict as assert } from 'node:assert';
-import { MCPClient, MCPConnectionState } from '../src/lib/mcp/MCPClient.js';
-import { MCPServerConfig, MCPServerError } from '../src/lib/types.js';
+import { MCPClient, MCPServerError, type MCPServerConfig, type SchemaType } from '../src/lib/mcp/MCPClient.js';
 
 test('Phase 2.3: MCPClient schema exploration methods exist and are properly typed', () => {
   const config: MCPServerConfig = {
@@ -16,19 +15,19 @@ test('Phase 2.3: MCPClient schema exploration methods exist and are properly typ
 
   const client = new MCPClient(config);
   
-  // Verify method signatures exist and are functions
+  // Verify method signatures
   assert.equal(typeof client.exploreSchema, 'function');
   assert.equal(typeof client.searchSchema, 'function');
   
-  // Test that methods return promises
-  const explorePromise = client.exploreSchema('Query').catch(() => {});
+  // Test method calls (should fail due to no connection, but validates signatures)
+  const explorePromise = client.exploreSchema('type').catch(() => {});
   const searchPromise = client.searchSchema('test').catch(() => {});
   
   assert.ok(explorePromise instanceof Promise);
   assert.ok(searchPromise instanceof Promise);
 });
 
-test('Phase 2.3: MCPClient schema exploration requires connection', async () => {
+test('Phase 2.3: MCPClient schema methods require connection', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -36,9 +35,9 @@ test('Phase 2.3: MCPClient schema exploration requires connection', async () => 
 
   const client = new MCPClient(config);
   
-  // Should throw error when trying to explore schema without connection
+  // All schema methods should throw error when not connected
   await assert.rejects(async () => {
-    await client.exploreSchema('Query');
+    await client.exploreSchema('type');
   }, MCPServerError);
   
   await assert.rejects(async () => {
@@ -46,7 +45,7 @@ test('Phase 2.3: MCPClient schema exploration requires connection', async () => 
   }, MCPServerError);
 });
 
-test('Phase 2.3: MCPClient exploreSchema parameter validation', async () => {
+test('Phase 2.3: MCPClient exploreSchema validates schema type parameter', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -54,32 +53,21 @@ test('Phase 2.3: MCPClient exploreSchema parameter validation', async () => {
 
   const client = new MCPClient(config);
   
-  // Test empty type parameter
+  // Test invalid schema types (should fail validation before connection check)
   await assert.rejects(async () => {
-    await client.exploreSchema('');
-  }, MCPServerError);
-  
-  // Test null/undefined type parameter
-  await assert.rejects(async () => {
-    await client.exploreSchema(null as any);
+    await client.exploreSchema('invalid' as SchemaType);
   }, MCPServerError);
   
   await assert.rejects(async () => {
-    await client.exploreSchema(undefined as any);
+    await client.exploreSchema('' as SchemaType);
   }, MCPServerError);
   
-  // Test non-string type parameter
   await assert.rejects(async () => {
-    await client.exploreSchema(123 as any);
-  }, MCPServerError);
-  
-  // Test whitespace-only type parameter
-  await assert.rejects(async () => {
-    await client.exploreSchema('   ');
+    await client.exploreSchema('   ' as SchemaType);
   }, MCPServerError);
 });
 
-test('Phase 2.3: MCPClient searchSchema parameter validation', async () => {
+test('Phase 2.3: MCPClient exploreSchema accepts valid schema types', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -87,69 +75,69 @@ test('Phase 2.3: MCPClient searchSchema parameter validation', async () => {
 
   const client = new MCPClient(config);
   
-  // Test empty keyword parameter
+  // Valid schema types should pass validation (but fail on connection)
+  const validTypes: SchemaType[] = ['enum', 'type', 'union', 'input', 'scalar', 'interface'];
+  
+  for (const type of validTypes) {
+    await assert.rejects(async () => {
+      await client.exploreSchema(type);
+    }, (error: any) => {
+      // Should be connection error, not validation error
+      return error instanceof MCPServerError && 
+             error.message.includes('not initialized');
+    });
+  }
+});
+
+test('Phase 2.3: MCPClient exploreSchema supports items parameter', async () => {
+  const config: MCPServerConfig = {
+    url: 'http://localhost:3000',
+    transport: 'http'
+  };
+
+  const client = new MCPClient(config);
+  
+  // Test with single item (should fail on connection, not validation)
+  await assert.rejects(async () => {
+    await client.exploreSchema('type', 'singleItem');
+  }, (error: any) => error instanceof MCPServerError && error.message.includes('not initialized'));
+  
+  // Test with multiple items (should fail on connection, not validation)
+  await assert.rejects(async () => {
+    await client.exploreSchema('type', ['item1', 'item2']);
+  }, (error: any) => error instanceof MCPServerError && error.message.includes('not initialized'));
+  
+  // Test without items parameter (should fail on connection, not validation)
+  await assert.rejects(async () => {
+    await client.exploreSchema('type');
+  }, (error: any) => error instanceof MCPServerError && error.message.includes('not initialized'));
+});
+
+test('Phase 2.3: MCPClient searchSchema validates keyword parameter', async () => {
+  const config: MCPServerConfig = {
+    url: 'http://localhost:3000',
+    transport: 'http'
+  };
+
+  const client = new MCPClient(config);
+  
+  // Test empty keyword (should fail validation before connection check)
   await assert.rejects(async () => {
     await client.searchSchema('');
   }, MCPServerError);
   
-  // Test null/undefined keyword parameter
-  await assert.rejects(async () => {
-    await client.searchSchema(null as any);
-  }, MCPServerError);
-  
-  await assert.rejects(async () => {
-    await client.searchSchema(undefined as any);
-  }, MCPServerError);
-  
-  // Test non-string keyword parameter
-  await assert.rejects(async () => {
-    await client.searchSchema(123 as any);
-  }, MCPServerError);
-  
-  // Test whitespace-only keyword parameter
   await assert.rejects(async () => {
     await client.searchSchema('   ');
   }, MCPServerError);
+  
+  // Test keyword too long (should fail validation before connection check)
+  const longKeyword = 'a'.repeat(101);
+  await assert.rejects(async () => {
+    await client.searchSchema(longKeyword);
+  }, MCPServerError);
 });
 
-test('Phase 2.3: MCPClient exploreSchema handles different parameter types', async () => {
-  const config: MCPServerConfig = {
-    url: 'http://nonexistent-server:9999',
-    transport: 'http',
-    timeout: 100
-  };
-
-  const client = new MCPClient(config);
-  
-  // Test that parameter validation happens before connection check
-  // (These should fail with parameter validation errors, not connection errors)
-  
-  try {
-    await client.exploreSchema('Query', 'singleItem');
-    assert.fail('Should have thrown connection error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
-  
-  try {
-    await client.exploreSchema('Query', ['item1', 'item2']);
-    assert.fail('Should have thrown connection error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
-  
-  try {
-    await client.exploreSchema('Query');
-    assert.fail('Should have thrown connection error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
-});
-
-test('Phase 2.3: MCPClient schema exploration error messages are descriptive', async () => {
+test('Phase 2.3: MCPClient searchSchema accepts valid keywords', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -157,74 +145,59 @@ test('Phase 2.3: MCPClient schema exploration error messages are descriptive', a
 
   const client = new MCPClient(config);
   
-  // Test exploreSchema error messages
+  // Valid keywords should pass validation (but fail on connection)
+  await assert.rejects(async () => {
+    await client.searchSchema('Customer');
+  }, (error: any) => {
+    return error instanceof MCPServerError && 
+           error.message.includes('not initialized');
+  });
+  
+  // Test keyword at max length
+  const maxKeyword = 'a'.repeat(100);
+  await assert.rejects(async () => {
+    await client.searchSchema(maxKeyword);
+  }, (error: any) => {
+    return error instanceof MCPServerError && 
+           error.message.includes('not initialized');
+  });
+});
+
+test('Phase 2.3: MCPClient schema methods integrate with tool call tracking', async () => {
+  const config: MCPServerConfig = {
+    url: 'http://localhost:3000',
+    transport: 'http'
+  };
+
+  const client = new MCPClient(config);
+  
+  // Clear history
+  client.clearToolCallHistory();
+  assert.equal(client.getToolCallHistory().length, 0);
+  
+  // Tool calls that fail due to connection issues (not validation) should be tracked
+  // Validation errors are thrown before tool calls are made, so they won't be tracked
+  // This is the correct behavior - only actual MCP tool calls should be tracked
+  
+  // Verify that validation errors don't create tool call entries
   try {
-    await client.exploreSchema('');
-    assert.fail('Should have thrown an error');
+    await client.exploreSchema('invalid' as SchemaType);
   } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('Schema type is required') && error.message.includes('non-empty string'));
+    // Expected validation error
   }
   
-  try {
-    await client.exploreSchema('Query');
-    assert.fail('Should have thrown an error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
-  
-  // Test searchSchema error messages
   try {
     await client.searchSchema('');
-    assert.fail('Should have thrown an error');
   } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('Search keyword is required'));
-    assert.ok(error.message.includes('non-empty string'));
+    // Expected validation error
   }
   
-  try {
-    await client.searchSchema('test');
-    assert.fail('Should have thrown an error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
-});
-
-test('Phase 2.3: MCPClient schema exploration tool call tracking', async () => {
-  const config: MCPServerConfig = {
-    url: 'http://nonexistent-server:9999',
-    transport: 'http',
-    timeout: 100
-  };
-
-  const client = new MCPClient(config);
-  
-  // Clear any existing history
-  client.clearToolCallHistory();
-  
-  // Try to explore schema (will fail due to no connection)
-  try {
-    await client.exploreSchema('Query');
-  } catch (error) {
-    // Expected to fail
-  }
-  
-  try {
-    await client.searchSchema('test');
-  } catch (error) {
-    // Expected to fail
-  }
-  
-  // Verify that failed schema exploration attempts are not tracked in history
-  // since the client checks connection first
+  // Validation errors should not be tracked as tool calls
   const history = client.getToolCallHistory();
-  assert.equal(history.length, 0); // No tool calls should be tracked without connection
+  assert.equal(history.length, 0, 'Validation errors should not create tool call entries');
 });
 
-test('Phase 2.3: MCPClient schema exploration parameter trimming', async () => {
+test('Phase 2.3: MCPClient schema methods handle parameter trimming', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -232,27 +205,17 @@ test('Phase 2.3: MCPClient schema exploration parameter trimming', async () => {
 
   const client = new MCPClient(config);
   
-  // Test that parameters are trimmed before validation
-  // These should pass parameter validation but fail on connection
-  
-  try {
-    await client.exploreSchema('  Query  ');
-    assert.fail('Should have thrown connection error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
-  
-  try {
-    await client.searchSchema('  test  ');
-    assert.fail('Should have thrown connection error');
-  } catch (error) {
-    assert.ok(error instanceof MCPServerError);
-    assert.ok(error.message.includes('not initialized'));
-  }
+  // Whitespace should be trimmed from search keywords
+  await assert.rejects(async () => {
+    await client.searchSchema('  Customer  ');
+  }, (error: any) => {
+    // Should fail on connection, not validation (meaning trimming worked)
+    return error instanceof MCPServerError && 
+           error.message.includes('not initialized');
+  });
 });
 
-test('Phase 2.3: MCPClient schema exploration integration with connection state', async () => {
+test('Phase 2.3: MCPClient schema methods integrate with connection state', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -261,25 +224,21 @@ test('Phase 2.3: MCPClient schema exploration integration with connection state'
   const client = new MCPClient(config);
   
   // Verify initial connection state
-  const initialState = client.getConnectionState();
-  assert.equal(initialState.connected, false);
-  assert.equal(initialState.initialized, false);
+  assert.equal(client.isConnected(), false);
   
-  // Schema exploration should fail with proper connection state checks
+  // Schema methods should check connection state
   await assert.rejects(async () => {
-    await client.exploreSchema('Query');
-  }, (error: MCPServerError) => {
-    return error.message.includes('not initialized');
+    await client.exploreSchema('type');
+  }, (error: any) => {
+    return error instanceof MCPServerError && 
+           error.message.includes('not initialized');
   });
   
-  await assert.rejects(async () => {
-    await client.searchSchema('test');
-  }, (error: MCPServerError) => {
-    return error.message.includes('not initialized');
-  });
+  // Connection state should remain unchanged
+  assert.equal(client.isConnected(), false);
 });
 
-test('Phase 2.3: MCPClient schema exploration type safety', () => {
+test('Phase 2.3: MCPClient schema method return types are properly typed', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -287,25 +246,19 @@ test('Phase 2.3: MCPClient schema exploration type safety', () => {
 
   const client = new MCPClient(config);
   
-  // Test that TypeScript types are properly defined
-  // These should compile without TypeScript errors
+  // Verify return types (TypeScript compilation test)
+  const explorePromise1: Promise<string> = client.exploreSchema('type').catch(() => '');
+  const explorePromise2: Promise<string> = client.exploreSchema('type', 'singleItem').catch(() => '');
+  const explorePromise3: Promise<string> = client.exploreSchema('type', ['item1', 'item2']).catch(() => '');
+  const searchPromise: Promise<any> = client.searchSchema('test').catch(() => {});
   
-  // exploreSchema with different parameter combinations
-  const explorePromise1: Promise<any> = client.exploreSchema('Query').catch(() => {});
-  const explorePromise2: Promise<any> = client.exploreSchema('Query', 'singleItem').catch(() => {});
-  const explorePromise3: Promise<any> = client.exploreSchema('Query', ['item1', 'item2']).catch(() => {});
-  
-  // searchSchema
-  const searchPromise: Promise<any> = client.searchSchema('keyword').catch(() => {});
-  
-  // Verify promises are properly typed
   assert.ok(explorePromise1 instanceof Promise);
   assert.ok(explorePromise2 instanceof Promise);
   assert.ok(explorePromise3 instanceof Promise);
   assert.ok(searchPromise instanceof Promise);
 });
 
-test('Phase 2.3: MCPClient schema exploration backward compatibility', async () => {
+test('Phase 2.3: MCPClient schema methods provide descriptive error messages', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -313,55 +266,36 @@ test('Phase 2.3: MCPClient schema exploration backward compatibility', async () 
 
   const client = new MCPClient(config);
   
-  // Capture console warnings
-  const originalWarn = console.warn;
-  const warnings: string[] = [];
-  console.warn = (message: string) => warnings.push(message);
-  
+  // Test descriptive error for invalid schema type
   try {
-    // Test that legacy exploreSchema method works and shows deprecation warning
-    const result = await client.legacyExploreSchema();
-    
-    // Should return a stub response
-    assert.ok(result);
-    assert.ok(typeof result === 'object');
-    
-    // Verify deprecation warning was shown
-    assert.ok(warnings.some(w => w.includes('legacyExploreSchema() is deprecated')));
-  } finally {
-    console.warn = originalWarn;
-  }
-});
-
-test('Phase 2.3: MCPClient schema exploration error context', async () => {
-  const config: MCPServerConfig = {
-    url: 'http://localhost:3000',
-    transport: 'http'
-  };
-
-  const client = new MCPClient(config);
-  
-  // Test that error context includes relevant information
-  try {
-    await client.exploreSchema('Query', ['item1', 'item2']);
+    await client.exploreSchema('invalid' as SchemaType);
     assert.fail('Should have thrown an error');
   } catch (error) {
     assert.ok(error instanceof MCPServerError);
-    // Error should include context about the operation
-    assert.ok(error.message.includes('not initialized'));
+    assert.ok(error.message.includes('Invalid schema type'));
+    assert.ok(error.message.includes('enum, type, union, input, scalar, interface'));
   }
   
+  // Test descriptive error for empty search keyword
   try {
-    await client.searchSchema('testKeyword');
+    await client.searchSchema('');
     assert.fail('Should have thrown an error');
   } catch (error) {
     assert.ok(error instanceof MCPServerError);
-    // Error should include context about the operation
-    assert.ok(error.message.includes('not initialized'));
+    assert.ok(error.message.includes('cannot be empty'));
+  }
+  
+  // Test descriptive error for keyword too long
+  try {
+    await client.searchSchema('a'.repeat(101));
+    assert.fail('Should have thrown an error');
+  } catch (error) {
+    assert.ok(error instanceof MCPServerError);
+    assert.ok(error.message.includes('cannot exceed 100 characters'));
   }
 });
 
-test('Phase 2.3: MCPClient schema exploration method consistency', () => {
+test('Phase 2.3: MCPClient schema methods support all required parameter combinations', async () => {
   const config: MCPServerConfig = {
     url: 'http://localhost:3000',
     transport: 'http'
@@ -369,19 +303,19 @@ test('Phase 2.3: MCPClient schema exploration method consistency', () => {
 
   const client = new MCPClient(config);
   
-  // Verify that schema exploration methods follow the same patterns as other methods
+  // All these should pass validation and fail only on connection
+  const testCases = [
+    () => client.exploreSchema('type'),
+    () => client.exploreSchema('enum', 'SingleItem'),
+    () => client.exploreSchema('input', ['item1', 'item2']),
+    () => client.searchSchema('Customer'),
+    () => client.searchSchema('a'.repeat(100)) // Max length
+  ];
   
-  // Both methods should be async and return promises
-  assert.equal(typeof client.exploreSchema, 'function');
-  assert.equal(typeof client.searchSchema, 'function');
-  
-  // Both methods should have proper parameter validation
-  // (This is tested in other tests, but we verify the pattern exists)
-  
-  // Both methods should integrate with the existing tool call tracking system
-  // (This will be verified when we can actually make successful calls)
-  
-  // Both methods should use the same error handling patterns as other methods
-  const history = client.getToolCallHistory();
-  assert.ok(Array.isArray(history));
+  for (const testCase of testCases) {
+    await assert.rejects(testCase, (error: any) => {
+      return error instanceof MCPServerError && 
+             error.message.includes('not initialized');
+    });
+  }
 });
