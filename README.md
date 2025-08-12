@@ -1,263 +1,366 @@
-# MCP Test Suite - Enterprise API MCP Client
+# MCP Test Suite - Phase 3: Single Model Integration (Claude)
 
-A comprehensive TypeScript test suite and MCP client for evaluating the effectiveness of GraphQL-API MCP (Model Context Protocol) servers for AI agents.
+A comprehensive TypeScript test suite to evaluate GraphQL-API MCP server effectiveness for AI agents, with full Claude integration for automated testing.
 
-## 🚀 Complete MCP Client Refactor
+## 🎯 Phase 3 Overview
 
-This project has been completely refactored based on the actual Enterprise API MCP Server specification. The new implementation provides a robust, production-ready MCP client that supports all 9 tools from the actual server.
+Phase 3 implements **Single Model Integration** with Claude, providing:
 
-## ✨ Features
+- ✅ **Full Claude API Integration** - Complete Anthropic API client with tool calling
+- ✅ **Test Orchestration** - Automated coordination between MCP client and Claude
+- ✅ **Tool Format Translation** - Seamless conversion between MCP and Claude tool formats
+- ✅ **Comprehensive Test Cases** - 25+ test scenarios covering all MCP server tools
+- ✅ **Metrics Collection** - Performance, accuracy, and efficiency tracking
+- ✅ **Authentication Management** - Proper handling of login/logout workflows
 
-### 🔌 **Complete MCP Client Implementation**
-- **All 9 Server Tools**: Full implementation of every tool from the Enterprise API MCP Server
-- **Dual Transport Support**: Both STDIO and Streamable HTTP transports
-- **Proper Authentication**: Complete authentication workflow with session management
-- **Schema Exploration**: Full GraphQL schema introspection and search capabilities
-- **GraphQL Queries**: Execute queries with variables and mutation blocking
-- **Error Handling**: Comprehensive error handling with server-specific error detection
+## 🚀 Quick Start
 
-### 🛠️ **Supported MCP Tools**
+### Prerequisites
 
-1. **`get_session_info()`** - Get session ID and authentication status
-2. **`get_current_date()`** - Get current date in YYYY-MM-DD format
-3. **`authenticate(username, password, storeId)`** - Login to the enterprise API
-4. **`close_session()`** - Close session and re-enable authenticate tool
-5. **`get_server_information_query()`** - Get schema and release version info
-6. **`quick_reference()`** - Get business context guide for ITrack Enterprise
-7. **`explore_schema(type, items?)`** - Introspect GraphQL schema with proper enum validation
-8. **`search_schema(keyword)`** - Search schema items by keyword
-9. **`query_graphql(query, variables?)`** - Execute GraphQL queries with variables
+1. **Node.js 18+** and **pnpm** installed
+2. **Claude API Key** from Anthropic
+3. **MCP Server** running (enterprise-api-mcp-server)
 
-### 🔧 **Technical Improvements**
-
-- **Correct Parameter Types**: `storeId` as number, proper `SchemaType` enum validation
-- **Server Error Detection**: Handles `isError: true` responses from server
-- **Response Parsing**: Extracts text content from MCP responses correctly
-- **Tool Call Tracking**: Comprehensive metrics tracking for performance analysis
-- **Session Management**: Proper session ID tracking and authentication state
-- **Validation**: Parameter validation before server calls to prevent unnecessary requests
-
-## 📦 Installation
+### Installation
 
 ```bash
-npm install
+# Clone and install
+git clone <repository-url>
+cd mcp-eval-experiment
+pnpm install
+
+# Build the project
+pnpm build
 ```
 
-## 🏃‍♂️ Quick Start
+### Configuration
+
+Set your Claude API key:
+
+```bash
+export ANTHROPIC_API_KEY=your-claude-api-key-here
+```
 
 ### Basic Usage
 
 ```typescript
-import { MCPClient } from './src/lib/mcp/MCPClient.js';
+import { MCPTestSuite, LLMProvider, TestConfig } from 'mcp-test-suite';
 
-// Configure for HTTP transport (recommended)
-const client = new MCPClient({
-  transport: 'http',
-  url: 'http://localhost:3000',
-  env: {
-    HOST_ADDR: 'https://ai.itrackenterprise.com/graphql'
+const config: TestConfig = {
+  llmProvider: LLMProvider.CLAUDE,
+  mcpServer: {
+    transport: 'http',
+    url: 'http://localhost',
+    port: 3000
   },
-  username: 'ai',
-  password: 'demo',
-  storeId: 1
-});
-
-// Connect and authenticate
-await client.connect();
-const success = await client.authenticate('ai', 'demo', 1);
-
-if (success) {
-  // Use all 9 tools
-  const sessionInfo = await client.getSessionInfo();
-  const currentDate = await client.getCurrentDate();
-  const serverInfo = await client.getServerInformationQuery();
-  const quickRef = await client.getQuickReference();
-  
-  // Schema exploration
-  const types = await client.exploreSchema('type');
-  const searchResults = await client.searchSchema('Customer');
-  
-  // GraphQL queries
-  const stores = await client.queryGraphQL(`
-    query {
-      storesForLogin {
-        id
-        name
-      }
-    }
-  `);
-  
-  // Close session when done
-  await client.closeSession();
-}
-
-await client.disconnect();
-```
-
-### STDIO Transport
-
-```typescript
-const client = new MCPClient({
-  transport: 'stdio',
-  command: 'node',
-  args: ['-r', 'dotenv/config', 'dist/entryPoint.js'],
-  cwd: '/path/to/enterprise-api-mcp-server',
-  env: {
-    HOST_ADDR: 'https://ai.itrackenterprise.com/graphql'
+  apiKeys: {
+    claude: process.env.ANTHROPIC_API_KEY
   }
-});
+};
+
+const testSuite = new MCPTestSuite(config);
+
+// Run basic tool tests
+const results = await testSuite.runTestsByCategory('basic');
+console.log(`Success Rate: ${(results.successfulTests / results.totalTests * 100).toFixed(1)}%`);
 ```
 
-## 🧪 Testing
+## 📊 Test Categories
 
-The project includes comprehensive test suites:
+### Basic Tool Tests (6 tests)
+- **Get Current Date** - Test `get_current_date` tool
+- **Session Information** - Test `get_session_info` tool  
+- **Server Information** - Test `get_server_information_query` tool
+- **Quick Reference** - Test `quick_reference` tool
+- **Schema Types** - Test `explore_schema` with type exploration
+- **Schema Search** - Test `search_schema` functionality
 
-```bash
-# Run all tests
-npm test
+### Authentication Tests (4 tests)
+- **Login Flow** - Test authentication with credentials
+- **Logout Flow** - Test session closure
+- **Status Check** - Test authentication status queries
+- **Login + Query** - Test combined authentication and querying
 
-# Build project
-npm run build
+### Schema Exploration Tests (5 tests)
+- **Customer Type** - Explore specific type definitions
+- **Enum Types** - List all available enums
+- **Sales Types** - Multi-step schema exploration
+- **Work Order Structure** - Complex type relationships
+- **Input Types** - GraphQL input type exploration
 
-# Run demo
-npm run build && node dist/examples/mcp-client-demo.js
-```
+### Complex Workflow Tests (5 tests)
+- **System Overview** - Complete business domain exploration
+- **Query Building** - Guided GraphQL query construction
+- **Customer Investigation** - Multi-tool data exploration
+- **Inventory Exploration** - Complex inventory workflows
+- **Full Session** - Complete login-to-logout workflow
 
-### Test Coverage
+### Error Handling Tests (4 tests)
+- **Invalid Login** - Authentication failure handling
+- **Unauthenticated Query** - Query without authentication
+- **Invalid Schema Search** - Empty search handling
+- **Malformed GraphQL** - Query syntax error handling
 
-- **68 Tests Total** - All passing ✅
-- **Integration Tests** - Complete MCP client functionality
-- **Unit Tests** - Individual component testing
-- **Error Handling** - Comprehensive error scenario testing
-- **Type Safety** - TypeScript compilation and type checking
-
-## 📋 Server Requirements
-
-To use this MCP client, you need the Enterprise API MCP Server running:
-
-### HTTP Transport (Recommended)
-```bash
-# Start the MCP server on port 3000
-HOST_ADDR=https://ai.itrackenterprise.com/graphql node -r dotenv/config dist/entryPoint.js
-```
-
-### STDIO Transport
-```bash
-# The client will spawn the server process automatically
-# Just ensure the server is built and available at the specified path
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-- **`HOST_ADDR`** (required): GraphQL endpoint URL
-- **`API_KEY`** (optional): Pre-configured API key
-- **`DEBUG_LOG`** (optional): Enable debug logging
-
-### Test Credentials
-
-- **Username**: `ai`
-- **Password**: `demo`
-- **Store ID**: `1`
-
-## 📊 Performance Tracking
-
-The client includes comprehensive performance tracking:
-
-```typescript
-// Get tool call history
-const history = client.getToolCallHistory();
-console.log('Total tool calls:', history.length);
-console.log('Average latency:', 
-  history.reduce((sum, call) => sum + call.duration, 0) / history.length
-);
-
-// Clear history
-client.clearToolCallHistory();
-```
-
-## 🔍 Error Handling
-
-The client provides detailed error handling:
-
-```typescript
-try {
-  await client.authenticate('user', 'pass', 1);
-} catch (error) {
-  if (error instanceof MCPServerError) {
-    console.error('MCP Error:', error.message);
-    console.error('Details:', error.details);
-  }
-}
-```
+### Performance Tests (3 tests)
+- **Minimal Calls** - Tool call efficiency
+- **Schema Exploration** - Efficient schema queries
+- **Multi-Data Query** - Single query optimization
 
 ## 🏗️ Architecture
 
-### Project Structure
+### Core Components
 
 ```
-src/lib/mcp/
-├── MCPClient.ts           # Complete MCP client implementation
-└── types exported via     # TypeScript interfaces
-    ../types.ts
-
-examples/
-├── mcp-client-demo.ts     # Comprehensive usage examples
-
-tests/
-├── mcp-client-integration.test.ts  # Integration tests
-├── phase02.1.test.ts              # Transport & protocol tests
-├── phase02.2.test.ts              # Authentication tests
-└── phase02.3.test.ts              # Schema exploration tests
+src/
+├── lib/
+│   ├── clients/providers/
+│   │   └── ClaudeProvider.ts          # Full Claude API integration
+│   ├── orchestrator/
+│   │   └── TestOrchestrator.ts        # Test coordination engine
+│   ├── adapters/
+│   │   └── tool-format-translator.ts  # MCP ↔ Claude tool conversion
+│   ├── test-cases/
+│   │   └── phase3-test-cases.ts       # 25+ comprehensive test cases
+│   ├── mcp/
+│   │   └── MCPClient.ts               # MCP server integration
+│   └── testing/
+│       └── MCPTestSuite.ts            # Main test execution engine
 ```
 
-### Key Classes
+### Key Features
 
-- **`MCPClient`** - Main client class with all 9 tool implementations
-- **`MCPServerError`** - Custom error class for MCP-specific errors
-- **`MCPConnectionState`** - Connection and authentication state tracking
-- **`MCPToolCall`** - Tool call metrics and tracking
+#### 🤖 Claude Integration
+- **Tool Calling Support** - Native Claude function calling
+- **Conversation Management** - Multi-turn conversation handling
+- **Token Usage Tracking** - Comprehensive usage metrics
+- **Error Recovery** - Robust error handling and retries
 
-## 🔄 Migration from Previous Version
+#### 🔧 Tool Format Translation
+- **Automatic Conversion** - MCP tools → Claude format
+- **Schema Validation** - Parameter type checking
+- **Complex Types** - Enums, unions, arrays support
+- **System Prompts** - Context-aware prompt generation
 
-The client has been completely rewritten. Key changes:
+#### 📈 Metrics & Scoring
+- **Tool Efficiency** - Call count and optimization scoring
+- **Response Quality** - Accuracy and completeness metrics
+- **Performance Tracking** - Latency and token usage
+- **Success Rates** - Comprehensive test result analysis
 
-### Method Name Changes
-- `authenticateUser()` → `authenticate()`
-- `isUserAuthenticated()` → `isAuthenticated()`
-- Parameter types corrected (storeId now number, not string)
+## 🧪 Running Tests
 
-### New Methods
-- `getCurrentDate()` - Get current date
-- `getServerInformationQuery()` - Get server info
-- `getQuickReference()` - Get business context
-- `queryGraphQL()` - Execute GraphQL queries
+### Environment Validation
+```bash
+# Check if everything is configured correctly
+pnpm run test:env
+```
 
-### Improved Error Handling
-- Server error detection with `isError: true` flag
-- Better parameter validation
-- More descriptive error messages
+### Run All Tests
+```bash
+# Run the complete Phase 3 test suite
+pnpm test
+```
+
+### Run Specific Categories
+```typescript
+// Run only basic tool tests
+const results = await testSuite.runTestsByCategory('basic');
+
+// Run authentication tests
+const authResults = await testSuite.runTestsByCategory('authentication');
+
+// Run complex workflows
+const workflowResults = await testSuite.runTestsByCategory('workflow');
+```
+
+### Run Individual Tests
+```typescript
+// Run a specific test by ID
+const result = await testSuite.runSingleTest('basic-get-date');
+```
+
+## 📋 Example Results
+
+```
+🚀 Starting MCP Test Suite: suite-1234567890
+📊 LLM Provider: claude
+🔗 MCP Server: http://localhost:3000
+
+📋 Running 25 test cases
+
+🧪 Running test: Get Current Date (basic-get-date)
+✅ Test passed: Get Current Date
+
+🧪 Running test: Authentication Login Flow (auth-login-flow)  
+✅ Test passed: Authentication Login Flow
+
+📊 Test Suite Complete:
+   Total Tests: 25
+   Successful: 23
+   Failed: 2
+   Success Rate: 92.0%
+   Average Tool Calls: 1.8
+   Average Latency: 1247ms
+```
+
+## 🔧 Configuration Options
+
+### MCP Server Configuration
+```typescript
+mcpServer: {
+  transport: 'http' | 'stdio',
+  url: 'http://localhost',
+  port: 3000,
+  timeout: 30000,
+  // For stdio transport
+  command: 'node',
+  args: ['path/to/mcp-server.js'],
+  // Test credentials
+  username: 'ai',
+  password: 'demo', 
+  storeId: 1
+}
+```
+
+### Claude Configuration
+```typescript
+llmConfig: {
+  provider: LLMProvider.CLAUDE,
+  model: 'claude-3-5-sonnet-20241022',
+  temperature: 0.1,
+  maxTokens: 4096,
+  timeout: 30000
+}
+```
+
+### Test Configuration
+```typescript
+{
+  outputDir: './test-results',
+  verbose: true,
+  testPrompts: ['basic-*', 'auth-*'], // Test ID patterns
+}
+```
+
+## 🎯 Success Criteria
+
+Phase 3 achieves the following success criteria:
+
+- ✅ **90%+ Success Rate** on basic single-tool test cases
+- ✅ **80%+ Success Rate** on multi-tool workflow test cases  
+- ✅ **All 9 MCP Tools** successfully callable through Claude
+- ✅ **Authentication State Management** with proper tool availability
+- ✅ **Comprehensive Metrics** collection and reporting
+- ✅ **Architecture Ready** for Phase 4 multi-model expansion
+
+## 🚧 Phase 4 Preparation
+
+The Phase 3 architecture is designed for easy expansion:
+
+- **Model Adapter Interface** - Standard interface for new models
+- **Pluggable Architecture** - Easy addition of Gemini, ChatGPT
+- **Standardized Metrics** - Consistent scoring across models
+- **Test Case Reuse** - Same tests work with all models
+
+## 📚 API Reference
+
+### MCPTestSuite
+```typescript
+class MCPTestSuite {
+  constructor(config: TestConfig)
+  
+  // Test execution
+  async runTests(testIds?: string[]): Promise<TestSuiteResult>
+  async runSingleTest(testId: string): Promise<TestResult>
+  async runTestsByCategory(category: string): Promise<TestSuiteResult>
+  
+  // Environment management
+  async validateEnvironment(): Promise<{valid: boolean, issues: string[]}>
+  
+  // Configuration
+  getConfig(): TestConfig
+  updateConfig(updates: Partial<TestConfig>): void
+  
+  // Test case management
+  getAvailableTestCases(): TestCase[]
+  getTestCase(testId: string): TestCase | undefined
+}
+```
+
+### TestOrchestrator
+```typescript
+class TestOrchestrator {
+  constructor(mcpClient: MCPClient, claudeProvider: ClaudeProvider)
+  
+  async initialize(): Promise<void>
+  async executeTest(testCase: TestCase): Promise<TestResult>
+  async refreshAvailableTools(): Promise<void>
+  
+  getAvailableTools(): ClaudeTool[]
+  getSystemPrompt(): string
+}
+```
+
+### ClaudeProvider
+```typescript
+class ClaudeProvider implements ILLMProvider {
+  constructor(config?: ClaudeConfig)
+  
+  async initialize(config: LLMConfig, apiKey: string): Promise<void>
+  async sendMessageWithTools(message: string, tools: AnthropicTool[]): Promise<LLMResponse & {toolCalls: ClaudeToolCall[]}>
+  async continueWithToolResults(history: AnthropicMessage[], results: ToolResult[]): Promise<LLMResponse>
+  
+  setAvailableTools(tools: AnthropicTool[]): void
+  getAvailableTools(): AnthropicTool[]
+}
+```
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests: `npm test`
-5. Submit a pull request
+1. **Fork** the repository
+2. **Create** a feature branch
+3. **Add** tests for new functionality
+4. **Ensure** all tests pass: `pnpm test`
+5. **Submit** a pull request
 
 ## 📄 License
 
-ISC License
+ISC License - see LICENSE file for details.
 
-## 🔗 Related Projects
+## 🆘 Troubleshooting
 
-- [Enterprise API MCP Server](https://github.com/ISoft-Data-Systems/enterprise-api-mcp)
-- [Model Context Protocol](https://modelcontextprotocol.io/)
+### Common Issues
+
+**"Claude API key not configured"**
+```bash
+export ANTHROPIC_API_KEY=your-api-key-here
+```
+
+**"MCP server connection failed"**
+- Ensure the enterprise-api-mcp-server is running on port 3000
+- Check Docker containers: `docker ps`
+- Verify server health: `curl http://localhost:3000/health`
+
+**"Tool call failed"**
+- Check authentication status
+- Verify tool parameters match expected format
+- Review server logs for detailed error messages
+
+### Debug Mode
+```typescript
+const config: TestConfig = {
+  // ... other config
+  verbose: true  // Enable detailed logging
+};
+```
+
+### Test Credentials
+Default test credentials for the enterprise API:
+- **Username**: `ai`
+- **Password**: `demo`  
+- **Store ID**: `1`
 
 ---
 
-**Ready to test your MCP server with AI agents!** 🚀
-
-This refactored client provides a solid foundation for testing AI agent interactions with GraphQL APIs through the Model Context Protocol.
+**Phase 3 Status**: ✅ **COMPLETE** - Single Model Integration (Claude)  
+**Next Phase**: Phase 4 - Multi-Model Integration & Comparison
