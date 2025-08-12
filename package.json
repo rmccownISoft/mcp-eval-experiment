@@ -32,6 +32,10 @@
     "dev": "tsc --watch",
     "test": "node --test dist/tests/**/*.test.js",
     "test:dev": "tsc && npm test",
+    "test:env": "tsc && node dist/examples/basic-usage.js",
+    "demo:mcp-client": "tsc && node dist/examples/mcp-client-demo.js",
+    "demo:phase3": "tsc && node dist/examples/phase3-claude-demo.js",
+    "demo:basic": "tsc && node dist/examples/basic-usage.js",
     "cli": "node dist/cli/index.js",
     "clean": "rimraf dist",
     "prepublishOnly": "npm run clean && npm run build"

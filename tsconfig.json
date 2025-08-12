@@ -2,7 +2,7 @@
 	"ts-node": {
 		"files": true
 	},
-	"include": ["src/**/*", "tests/**/*"],
+	"include": ["src/**/*", "tests/**/*", "examples/**/*"],
 	"compilerOptions": {
         "target": "ES2020", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
         "module": "ES2020", /* Specify what module code is generated. */
@@ -22,5 +22,5 @@
         "strictPropertyInitialization": false, /* Check for class properties that are declared but not set in the constructor. */
         "skipLibCheck": true /* Skip type checking all .d.ts files. */
 	},
-	"exclude": ["dist", "node_modules", "tools", "eslint.config.js", "examples", "config"]
+	"exclude": ["dist", "node_modules", "tools", "eslint.config.js", "config"]
 }
