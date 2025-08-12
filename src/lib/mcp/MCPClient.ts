@@ -571,11 +571,6 @@ export class MCPClient {
       throw new MCPServerError('GraphQL query cannot be empty');
     }
 
-    // Check for mutations (blocked for safety)
-    if (query.trim().toLowerCase().startsWith('mutation')) {
-      throw new MCPServerError('Mutations are blocked for safety');
-    }
-
     const parameters: Record<string, any> = { query: query.trim() };
     if (variables !== undefined && variables.trim().length > 0) {
       // Validate JSON format for variables
