@@ -339,7 +339,7 @@ export ANTHROPIC_API_KEY=your-api-key-here
 **"MCP server connection failed"**
 - Ensure the enterprise-api-mcp-server is running on port 3000
 - Check Docker containers: `docker ps`
-- Verify server health: `curl http://localhost:3000/health`
+- Verify server health: `curl http://localhost:3000/ready`
 
 **"Tool call failed"**
 - Check authentication status
