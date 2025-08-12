@@ -14,10 +14,11 @@ async function basicExample() {
     const testSuite1 = new MCPTestSuite({
       llmProvider: LLMProvider.CLAUDE,
       mcpServer: {
+        transport: 'http',
         url: 'http://localhost:3000',
         username: 'test_user',
         password: 'test_password',
-        storeId: 'store_001'
+        storeId: 1
       },
       apiKeys: {
         claude: 'sk-ant-api03-your-key-here'
