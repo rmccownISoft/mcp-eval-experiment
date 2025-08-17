@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "generated_date": "2025-08-16",
+    "category": "proposed",
+    "total_test_cases": 25,
+    "authentication_store": "TEST: ISOFT DATA SYSTEMS",
+    "description": "proposed_prompts"
+  },
+  "prompts": [
+    {
+      "id": "actual_071",
+      "user_persona": "",
+      "natural_language_prompt": "Summarize the following customer notes. Highlight repeat issues, delays, or complaints. Include last service update and action items.",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_072",
+      "user_persona": "",
+      "natural_language_prompt": "Rewrite the following technician notes into customer-facing language suitable for a phone call or email.",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_073",
+      "user_persona": "",
+      "natural_language_prompt": "List any sales orders missing a PO that are marked as PO-required. Return customer name and order date.",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_074",
+      "user_persona": "",
+      "natural_language_prompt": "Find me 25 customers who were previously active, whose sales have dropped off, so I can assign out CRM call tickets to my salesmen",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_075",
+      "user_persona": "What are the top items appearing on price quotes. ",
+      "natural_language_prompt": "",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_076",
+      "user_persona": "",
+      "natural_language_prompt": "Ignoring the quotes that turned into sales, what are the top items that are lost sales because we're not stocking them",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_077",
+      "user_persona": "",
+      "natural_language_prompt": "Find me the average sale price of Engines with model 3406B",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_078",
+      "user_persona": "",
+      "natural_language_prompt": "How many CAT 3406Bs do I have in stock",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_079",
+      "user_persona": "",
+      "natural_language_prompt": "How many vehicles do I have waiting to be dismantled",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_080",
+      "user_persona": "",
+      "natural_language_prompt": "How many CAT 3406Bs could I pull out of the vehicles I have waiting to be dismantled",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_081",
+      "user_persona": "Based on sales trends of hot engines and transmissions, which vehicle should I tear down next?",
+      "natural_language_prompt": "",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_082",
+      "user_persona": "",
+      "natural_language_prompt": "Do I have any Internet Orders I need to process right now?",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_083",
+      "user_persona": "",
+      "natural_language_prompt": "List all my open/unreceived POs",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_084",
+      "user_persona": "",
+      "natural_language_prompt": "List the 10 vehicles with the most remaining inventory value",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_085",
+      "user_persona": "",
+      "natural_language_prompt": "List the 10 vehicles with the most <sales/COGs/Profit>",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_086",
+      "user_persona": "",
+      "natural_language_prompt": "What is my gross margin on vehicle <X>",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_087",
+      "user_persona": "",
+      "natural_language_prompt": "Was vehicle <X> a good buy?",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_088",
+      "user_persona": "",
+      "natural_language_prompt": "How many parts have been sold off of vehicle <X>",
+      "prompt_variations": []
+    },
+        {
+      "id": "actual_089",
+      "user_persona": "",
+      "natural_language_prompt": "How many parts are still available on vehicle <X>",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_090",
+      "user_persona": "",
+      "natural_language_prompt": "How many <sales/quotes> have I written to customer <contact or company name X> in the last <month/year>",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_091",
+      "user_persona": "",
+      "natural_language_prompt": "How many purchase orders have I written to vendor <contact or company name X> in the last <month/year>",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_092",
+      "user_persona": "",
+      "natural_language_prompt": "What is the average <sales or revenue/profit> on invoices to customer <X> in the last <period Y>",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_093",
+      "user_persona": "How many available parts, listed online, don't have at least one public image",
+      "natural_language_prompt": "",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_094",
+      "user_persona": "",
+      "natural_language_prompt": "Do I have any active users that haven't logged in in more than 12 months",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_095",
+      "user_persona": "",
+      "natural_language_prompt": "Are there any CRM tickets that are past due?",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_096",
+      "user_persona": "",
+      "natural_language_prompt": "My salesman is going to be in <City X> next week, find my top 20 customers with 30 miles so I can assign CRM tickets for him to contact them while he's there",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_097",
+      "user_persona": "",
+      "natural_language_prompt": "What inventory has been sitting for too long and should be sold at auction?",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_098",
+      "user_persona": "",
+      "natural_language_prompt": "What inventory has been sitting for too long and should be sold at auction?",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_099",
+      "user_persona": "",
+      "natural_language_prompt": "Analyze our parts sales trends",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_100",
+      "user_persona": "",
+      "natural_language_prompt": "Summarize the repair history on unit 37A from ABC Logistics.",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_101",
+      "user_persona": "",
+      "natural_language_prompt": "Did we talk to the customer yesterday about the status of their truck in WO# 9823?",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_102",
+      "user_persona": "",
+      "natural_language_prompt": "Write a call script to explain to the customer why their transmission rebuild is delayed.",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_103",
+      "user_persona": "",
+      "natural_language_prompt": "Summarize the notes on MTP Work Order 1187 for billing review.",
+      "prompt_variations": []
+    },
+    {
+      "id": "actual_104",
+      "user_persona": "",
+      "natural_language_prompt": "Show me all work orders in the last 48 hours that haven’t been updated with a customer note.",
+      "prompt_variations": []
+    }
+  ]
+}
