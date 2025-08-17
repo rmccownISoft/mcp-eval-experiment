@@ -1,4 +1,4 @@
-{
+export const prompt1 = {
     "test_library_metadata": {
         "generated_date": "2025-08-12",
         "category": "search_filtering", 
@@ -1723,58 +1723,6 @@
                 "List Chelsea brand inventory"
             ]
         },
-//{
-//    "id": "vehicle_mileage_range_search_033",
-//    "category": "search_filtering",
-//    "complexity": 3,
-//    "user_persona": "dismantler",
-//    "natural_language_prompt": "Find vehicles with mileage over 30,000",
-//    "verified_graphql_query": "query SearchHighMileageVehicles {\n  vehicles(\n    filter: { \n      mileage: { gt: 30000 }\n    }\n    pagination: { pageNumber: 1, pageSize: 10 }\n    orderBy: [mileage_DESC]\n  ) {\n    items {\n      id\n      stockNumber\n      vin\n      make\n      model { name }\n      year\n      mileage\n      condition\n      status\n      dismantled\n      location\n    }\n    pageInfo {\n      pageNumber\n      pageSize\n      totalPages\n    }\n  }\n}",
-//    "verified_response_sample": {
-//        "data": {
-//            "vehicles": {
-//                "items": [
-//                    {
-//                        "id": 34,
-//                        "stockNumber": "R333849",
-//                        "vin": "",
-//                        "make": "Ottawa",
-//                        "model": {
-//                            "name": "4X2"
-//                        },
-//                        "year": 2013,
-//                        "mileage": 47193,
-//                        "condition": "",
-//                        "status": "S",
-//                        "dismantled": false,
-//                        "location": "Main"
-//                    }
-//                ],
-//                "pageInfo": {
-//                    "pageNumber": 1,
-//                    "pageSize": 10,
-//                    "totalPages": 1
-//                }
-//            }
-//        }
-//    },
-//    "response_metadata": {
-//        "execution_time_ms": 42,
-//        "result_count": 1,
-//        "query_complexity": "high"
-//    },
-//    "test_assertions": [
-//        "Filters vehicles by mileage greater than 30,000",
-//        "Orders results by mileage descending",
-//        "Returns vehicle specifications and location",
-//        "Shows only vehicles with recorded mileage"
-//    ],
-//    "prompt_variations": [
-//        "Show high mileage vehicles",
-//        "Find trucks with over 30k miles",
-//        "List vehicles with significant mileage"
-//    ]
-//},
         {
             "id": "inventory_status_active_filter_034",
             "category": "search_filtering",

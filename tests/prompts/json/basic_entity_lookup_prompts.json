@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "generated_date": "2025-08-12",
+    "category": "basic_entity_lookups",
+    "total_test_cases": 15,
+    "authentication_store": "TEST: ISOFT DATA SYSTEMS",
+    "description": "Basic single entity retrieval test cases using actual system data"
+  },
+  "prompts": [
+    {
+      "id": "inventory_lookup_part_001",
+      "user_persona": "parts_counter",
+      "natural_language_prompt": "Show me part number 0107-16-20",
+      "prompt_variations": [
+        "Get details for part 0107-16-20",
+        "Look up part number 0107-16-20",
+        "Find inventory item 0107-16-20"
+      ]
+    },
+    {
+      "id": "inventory_lookup_id_002",
+      "user_persona": "parts_counter",
+      "natural_language_prompt": "Get inventory details for ID 5",
+      "prompt_variations": [
+        "Show inventory item with ID 5",
+        "Display details for inventory 5",
+        "Look up inventory record 5"
+      ]
+    },
+    {
+      "id": "customer_lookup_company_003",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Look up customer MARTIN MARIETTA MATERIALS, INC",
+      "prompt_variations": [
+        "Find customer Martin Marietta Materials",
+        "Show me MARTIN MARIETTA MATERIALS, INC details",
+        "Get customer info for Martin Marietta"
+      ]
+    },
+    {
+      "id": "customer_lookup_id_004",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Show customer ID 2 details",
+      "prompt_variations": [
+        "Get customer 2 information",
+        "Display customer record 2",
+        "Show details for customer ID 2"
+      ]
+    },
+    {
+      "id": "vehicle_lookup_vin_005",
+      "user_persona": "dismantler",
+      "natural_language_prompt": "Get vehicle with VIN 4LMSB2115HL031419",
+      "prompt_variations": [
+        "Look up VIN 4LMSB2115HL031419",
+        "Show vehicle 4LMSB2115HL031419",
+        "Find truck with VIN 4LMSB2115HL031419"
+      ]
+    },
+    {
+      "id": "vehicle_lookup_stock_006",
+      "user_persona": "dismantler",
+      "natural_language_prompt": "Show me vehicle stock number T25120",
+      "prompt_variations": [
+        "Get vehicle T25120",
+        "Look up stock number T25120",
+        "Find truck stock T25120"
+      ]
+    },
+    {
+      "id": "sales_order_lookup_id_007",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Display sales order 2",
+      "prompt_variations": [
+        "Get sales order 2",
+        "Show invoice 2",
+        "Look up order number 2"
+      ]
+    },
+    {
+      "id": "work_order_lookup_id_008",
+      "user_persona": "service_manager",
+      "natural_language_prompt": "Show work order 3 details",
+      "prompt_variations": [
+        "Get work order 3",
+        "Display service ticket 3",
+        "Show repair order 3"
+      ]
+    },
+    {
+      "id": "inventory_search_description_009",
+      "user_persona": "parts_counter",
+      "natural_language_prompt": "Find parts with 'ADAPTER' in the description",
+      "prompt_variations": [
+        "Show me all adapter parts",
+        "Search for adapter components",
+        "List parts with adapter in name"
+      ]
+    },
+    {
+      "id": "customer_search_fleet_010",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Find customers with 'TRANSPORT' in company name",
+      "prompt_variations": [
+        "Show transport companies",
+        "Find transportation customers",
+        "List transport fleet customers"
+      ]
+    },
+    {
+      "id": "vehicle_search_make_011",
+      "user_persona": "dismantler",
+      "natural_language_prompt": "Show all Ottawa vehicles",
+      "prompt_variations": [
+        "Find Ottawa trucks",
+        "List Ottawa brand vehicles",
+        "Show me Ottawa equipment"
+      ]
+    },
+    {
+      "id": "sales_order_by_customer_012",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Show sales orders for ABC-CENTRAL BLOCK& BRICK",
+      "prompt_variations": [
+        "Get orders for ABC Central Block",
+        "Show ABC-CENTRAL sales history",
+        "Find purchases by ABC-CENTRAL BLOCK& BRICK"
+      ]
+    },
+    {
+      "id": "inventory_low_stock_014",
+      "user_persona": "inventory_manager",
+      "natural_language_prompt": "Show parts with zero quantity",
+      "prompt_variations": [
+        "Find out of stock items",
+        "Show empty inventory",
+        "List parts with no quantity"
+      ]
+    },
+    {
+      "id": "vehicle_undismantled_015",
+      "user_persona": "dismantler",
+      "natural_language_prompt": "Find vehicles that haven't been dismantled yet",
+      "prompt_variations": [
+        "Show intact vehicles",
+        "List vehicles awaiting dismantling",
+        "Find whole unit vehicles"
+      ]
+    }
+  ]
+}

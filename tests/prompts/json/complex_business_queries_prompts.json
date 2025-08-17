@@ -1,0 +1,111 @@
+{
+  "metadata": {
+    "generated_date": "2025-08-17",
+    "category": "complex_business_queries",
+    "total_test_cases": 15,
+    "authentication_store": "TEST: ISOFT DATA SYSTEMS",
+    "description": "Complex multi-entity business analysis test cases using actual system data"
+  },
+  "prompts": [
+    {
+      "id": "sales_order_profitability_001",
+      "user_persona": "sales_manager",
+      "natural_language_prompt": "Show me the most profitable sales orders from the last month with profit margins",
+      "prompt_variations": [
+        "Calculate profit margins on recent sales",
+        "Show profitable orders with cost breakdowns",
+        "Analyze sales order profitability this month"
+      ]
+    },
+    {
+      "id": "customer_aging_analysis_002",
+      "user_persona": "credit_manager",
+      "natural_language_prompt": "Find customers with outstanding balances over $1000 and their purchase history",
+      "prompt_variations": [
+        "Show customers with high outstanding balances",
+        "Find accounts receivable over $1000",
+        "List customers with aging balances and purchase history"
+      ]
+    },
+    {
+      "id": "work_order_service_analysis_003",
+      "user_persona": "service_manager",
+      "natural_language_prompt": "Show open work orders with job details and estimated completion times",
+      "prompt_variations": [
+        "List active service orders with job details",
+        "Show pending work orders and labor rates",
+        "Find open repair tickets with customer info"
+      ]
+    },
+    {
+      "id": "inventory_reorder_analysis_004",
+      "user_persona": "purchasing_manager",
+      "natural_language_prompt": "Find parts with zero quantity that have recent sales activity for reordering",
+      "prompt_variations": [
+        "Show out of stock items needing reorder",
+        "Find zero quantity parts with sales history",
+        "List reorder recommendations with vendor info"
+      ]
+    },
+    {
+      "id": "top_selling_parts_analysis_005",
+      "user_persona": "inventory_manager",
+      "natural_language_prompt": "Show me the highest revenue generating parts with sales volume and profit margins",
+      "prompt_variations": [
+        "Find highest revenue parts by sales volume",
+        "Show top performing inventory items",
+        "Analyze best selling parts with profit data"
+      ]
+    },
+    {
+      "id": "customer_purchase_patterns_006",
+      "user_persona": "sales_manager",
+      "natural_language_prompt": "Analyze customer purchase patterns for fleet operators with repeat business",
+      "prompt_variations": [
+        "Show fleet customer buying patterns",
+        "Analyze transport company purchase history",
+        "Find repeat business patterns for fleet operators"
+      ]
+    },
+    {
+      "id": "service_revenue_analysis_007",
+      "user_persona": "service_manager",
+      "natural_language_prompt": "Calculate service department revenue by job type and labor rates",
+      "prompt_variations": [
+        "Calculate labor revenue by service type",
+        "Show service department earnings by job category",
+        "Analyze work order revenue and labor rates"
+      ]
+    },
+    {
+      "id": "parts_category_performance_010",
+      "user_persona": "inventory_manager",
+      "natural_language_prompt": "Analyze parts category performance by sales volume and profit margins",
+      "prompt_variations": [
+        "Show highest value parts by category",
+        "Analyze category performance by margins",
+        "Find top revenue parts by classification"
+      ]
+    },
+    {
+      "id": "monthly_sales_trends_011",
+      "user_persona": "sales_manager",
+      "natural_language_prompt": "Show monthly sales trends with customer and product analysis",
+      "prompt_variations": [
+        "Analyze sales performance by month",
+        "Show recent sales trends with customer breakdown",
+        "Track monthly revenue patterns by product"
+      ]
+    },
+    {
+      "id": "customer_credit_risk_analysis_012",
+      "user_persona": "credit_manager",
+      "natural_language_prompt": "Identify customers with credit risk based on balance vs credit limit ratios",
+      "prompt_variations": [
+        "Find customers exceeding credit limits",
+        "Analyze credit risk by balance ratios",
+        "Show high risk accounts with payment history"
+      ]
+    }
+  ]
+}

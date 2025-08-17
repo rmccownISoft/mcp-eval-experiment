@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "generated_date": "2025-08-14",
+    "category": "real_world_scenarios",
+    "total_test_cases": 10,
+    "authentication_store": "TEST: ISOFT DATA SYSTEMS",
+    "description": "Real-world daily operations test cases representing typical user workflows"
+  },
+  "prompts": [
+    {
+      "id": "parts_counter_brake_search_016",
+      "user_persona": "parts_counter",
+      "natural_language_prompt": "Customer needs brake parts for a Freightliner Columbia, what do we have in stock?",
+      "prompt_variations": [
+        "Show me brake components for Freightliner trucks",
+        "What brake parts do we have for Columbia model",
+        "Find brake system parts for Freightliner"
+      ]
+    },
+    {
+      "id": "sales_quote_transmission_018",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Customer wants a quote for transmission replacement, show me our Allison transmissions",
+      "prompt_variations": [
+        "Show me Allison transmission options",
+        "Find transmissions from Allison for quote",
+        "List Allison transmission inventory"
+      ]
+    },
+    {
+      "id": "management_weekly_sales_019",
+      "user_persona": "manager",
+      "natural_language_prompt": "Show me this week's sales performance",
+      "prompt_variations": [
+        "Display sales results for this week",
+        "What are our sales numbers this week",
+        "Show weekly sales report"
+      ]
+    },
+    {
+      "id": "sales_customer_purchase_history_023",
+      "user_persona": "sales_rep",
+      "natural_language_prompt": "Show me purchase history for ABC-CENTRAL BLOCK& BRICK customer",
+      "prompt_variations": [
+        "Get sales history for ABC-CENTRAL BLOCK& BRICK",
+        "Show what ABC Central has purchased",
+        "Display customer order history for ABC Central"
+      ]
+    },
+    {
+      "id": "inventory_manager_low_stock_alert_024",
+      "user_persona": "inventory_manager",
+      "natural_language_prompt": "Show me all parts with quantity less than 5 that are active",
+      "prompt_variations": [
+        "Find items with low inventory levels",
+        "Show parts running low on stock",
+        "List active inventory below 5 units"
+      ]
+    },
+    {
+      "id": "service_manager_vehicle_maintenance_025",
+      "user_persona": "service_manager",
+      "natural_language_prompt": "Show me all Freightliner vehicles that need maintenance scheduling",
+      "prompt_variations": [
+        "Find Freightliner trucks for service scheduling",
+        "Show active Freightliner vehicles",
+        "List Freightliner fleet for maintenance"
+      ]
+    }
+  ]
+}

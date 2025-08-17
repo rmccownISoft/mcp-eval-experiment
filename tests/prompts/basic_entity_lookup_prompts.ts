@@ -1,4 +1,4 @@
-{
+const round2 ={
     "test_library_metadata": {
         "generated_date": "2025-08-12",
         "category": "basic_entity_lookups", 
@@ -950,58 +950,6 @@
                 "Find purchases by ABC-CENTRAL BLOCK& BRICK"
             ]
         },
-        //### 13. work_order_by_customer_013 - No Customer Filter Available
-        //**Problem:** WorkOrderFilter doesn't include customer filtering
-        //**Note:** Customer type doesn't have workOrders relationship either
-        // {
-        //     "id": "work_order_by_customer_013",
-        //     "category": "basic_lookup",
-        //     "complexity": 2,
-        //     "user_persona": "service_manager",
-        //     "natural_language_prompt": "Show work orders for UPS AUTOMOTIVE DEPARTMENT",
-        //     "verified_graphql_query": "query GetWorkOrdersByCustomer {\n  workOrders(\n    filter: { \n      customer: { \n        companyName: { like: \"UPS AUTOMOTIVE DEPARTMENT%\" } \n      } \n    }\n    pagination: { pageNumber: 1, pageSize: 10 }\n    orderBy: [{ field: DATE, direction: DESC }]\n  ) {\n    items {\n      workOrderId\n      description\n      date\n      dateClosed\n      closed\n      total\n      customer {\n        companyName\n        contactName\n      }\n      jobCount\n    }\n    pageInfo {\n      totalCount\n      currentPage\n    }\n  }\n}",
-        //     "verified_response_sample": {
-        //         "data": {
-        //             "workOrders": {
-        //                 "items": [
-        //                     {
-        //                         "workOrderId": 3,
-        //                         "description": "GENOLA - Heavy Duty Truck: FREIGHTLINERFL60",
-        //                         "date": "2024-08-05",
-        //                         "dateClosed": null,
-        //                         "closed": false,
-        //                         "total": "1250.00",
-        //                         "customer": {
-        //                             "companyName": "UPS AUTOMOTIVE DEPARTMENT",
-        //                             "contactName": "Mike Wilson"
-        //                         },
-        //                         "jobCount": 2
-        //                     }
-        //                 ],
-        //                 "pageInfo": {
-        //                   "totalCount": 1,
-        //                   "currentPage": 1
-        //                 }
-        //             }
-        //         }
-        //     },
-        //     "response_metadata": {
-        //         "execution_time_ms": 52,
-        //         "result_count": 1,
-        //         "query_complexity": "medium"
-        //     },
-        //     "test_assertions": [
-        //         "Finds work orders for specific customer",
-        //         "Returns service description and status",
-        //         "Shows job count and totals",
-        //         "Orders by date descending"
-        //     ],
-        //     "prompt_variations": [
-        //         "Get service orders for UPS",
-        //         "Show UPS repair tickets",
-        //         "Find work orders for UPS AUTOMOTIVE"
-        //     ]
-        // },
         {
             "id": "inventory_low_stock_014",
             "category": "basic_lookup",

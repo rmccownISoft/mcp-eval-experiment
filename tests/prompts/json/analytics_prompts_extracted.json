@@ -1,0 +1,211 @@
+{
+  "metadata": {
+    "generated_date": "2025-08-16",
+    "category": "analytics",
+    "total_test_cases": 25,
+    "authentication_store": "TEST: ISOFT DATA SYSTEMS",
+    "description": "Analytics and business intelligence test cases covering sales performance, customer analysis, inventory analytics, and service operations metrics"
+  },
+  "prompts": [
+    {
+      "id": "sales_performance_recent_001",
+      "user_persona": "sales_manager",
+      "natural_language_prompt": "Show me sales performance for the last 30 days",
+      "prompt_variations": [
+        "Show recent sales performance",
+        "Get sales data for the past month",
+        "Display finalized sales orders from last 30 days"
+      ]
+    },
+    {
+      "id": "customer_balance_analysis_002",
+      "user_persona": "credit_manager",
+      "natural_language_prompt": "What are our top customers by outstanding balance?",
+      "prompt_variations": [
+        "Show customers with highest balances",
+        "Find accounts with outstanding debt",
+        "List top debtors by balance amount"
+      ]
+    },
+    {
+      "id": "inventory_high_value_analysis_003",
+      "user_persona": "inventory_manager",
+      "natural_language_prompt": "Show me the most valuable inventory we have in stock",
+      "prompt_variations": [
+        "Find old inventory that hasn't moved",
+        "Show aging stock analysis",
+        "Identify stagnant inventory items"
+      ]
+    },
+    {
+      "id": "profitability_analysis_004",
+      "user_persona": "financial_analyst",
+      "natural_language_prompt": "Calculate profit margins on high-value inventory",
+      "prompt_variations": [
+        "Show profit margins on expensive parts",
+        "Analyze pricing tiers and profitability",
+        "Calculate margins on high-value items"
+      ]
+    },
+    {
+      "id": "customer_credit_risk_analysis_005",
+      "user_persona": "credit_manager",
+      "natural_language_prompt": "Find customers who are over their credit limits",
+      "prompt_variations": [
+        "Show credit risk customers",
+        "Find accounts over credit limits",
+        "Analyze customer credit exposure"
+      ]
+    },
+    {
+      "id": "inventory_by_manufacturer_045",
+      "user_persona": "purchasing_manager",
+      "natural_language_prompt": "Show inventory distribution by manufacturer",
+      "prompt_variations": [
+        "Analyze inventory by brand",
+        "Show parts distribution by manufacturer",
+        "Group inventory by supplier"
+      ]
+    },
+    {
+      "id": "sales_order_line_analysis_046",
+      "user_persona": "sales_analyst",
+      "natural_language_prompt": "Analyze sales order details and line items for trends",
+      "prompt_variations": [
+        "Break down sales by line items",
+        "Show product sales details",
+        "Analyze sales order composition"
+      ]
+    },
+    {
+      "id": "pricing_tier_analysis_048",
+      "user_persona": "pricing_manager",
+      "natural_language_prompt": "Compare pricing tiers across inventory categories",
+      "prompt_variations": [
+        "Analyze pricing strategies",
+        "Compare price levels across tiers",
+        "Show markup analysis by category"
+      ]
+    },
+    {
+      "id": "customer_sales_frequency_049",
+      "user_persona": "customer_relationship_manager",
+      "natural_language_prompt": "Analyze customer purchase frequency and patterns",
+      "prompt_variations": [
+        "Show customer buying patterns",
+        "Analyze purchase frequency by customer",
+        "Track customer order history"
+      ]
+    },
+    {
+      "id": "inventory_location_analysis_050",
+      "user_persona": "warehouse_manager",
+      "natural_language_prompt": "Show inventory distribution across warehouse locations",
+      "prompt_variations": [
+        "Analyze warehouse inventory placement",
+        "Show parts location distribution",
+        "Map inventory to storage locations"
+      ]
+    },
+    {
+      "id": "seasonal_sales_trends_051",
+      "user_persona": "business_analyst",
+      "natural_language_prompt": "Analyze sales trends by month for seasonal patterns",
+      "prompt_variations": [
+        "Show monthly sales patterns",
+        "Analyze seasonal business trends",
+        "Track sales by time of year"
+      ]
+    },
+    {
+      "id": "service_labor_efficiency_052",
+      "user_persona": "service_manager",
+      "natural_language_prompt": "Analyze service department labor efficiency and rates",
+      "prompt_variations": [
+        "Show service department productivity",
+        "Analyze technician efficiency rates",
+        "Track labor performance metrics"
+      ]
+    },
+    {
+      "id": "top_selling_parts_analysis_053",
+      "user_persona": "inventory_analyst",
+      "natural_language_prompt": "Find our top-selling parts by quantity and revenue",
+      "prompt_variations": [
+        "Show best-selling inventory items",
+        "Analyze top revenue generating parts",
+        "Find most popular products by sales"
+      ]
+    },
+    {
+      "id": "customer_geographic_analysis_054",
+      "user_persona": "sales_director",
+      "natural_language_prompt": "Analyze customer distribution by geographic regions",
+      "prompt_variations": [
+        "Show customer locations by region",
+        "Analyze sales territory distribution",
+        "Map customers by geographic area"
+      ]
+    },
+    {
+      "id": "inventory_investment_analysis_055",
+      "user_persona": "financial_controller",
+      "natural_language_prompt": "Calculate total inventory investment and valuation",
+      "prompt_variations": [
+        "Show total inventory value",
+        "Calculate inventory investment levels",
+        "Analyze inventory asset valuation"
+      ]
+    },
+    {
+      "id": "salesperson_performance_analysis_056",
+      "user_persona": "sales_manager",
+      "natural_language_prompt": "Analyze sales performance by salesperson",
+      "prompt_variations": [
+        "Show sales rep performance metrics",
+        "Analyze salesperson productivity",
+        "Track individual sales achievements"
+      ]
+    },
+    {
+      "id": "parts_margin_analysis_057",
+      "user_persona": "pricing_analyst",
+      "natural_language_prompt": "Analyze profit margins across different part categories",
+      "prompt_variations": [
+        "Calculate profit margins by category",
+        "Show markup analysis across parts",
+        "Analyze pricing profitability by type"
+      ]
+    },
+    {
+      "id": "work_order_cost_analysis_059",
+      "user_persona": "service_controller",
+      "natural_language_prompt": "Analyze work order profitability and cost breakdown",
+      "prompt_variations": [
+        "Analyze service department profitability",
+        "Show work order cost breakdown",
+        "Calculate service margin analysis"
+      ]
+    },
+    {
+      "id": "manufacturer_performance_analysis_039",
+      "user_persona": "purchasing_manager",
+      "natural_language_prompt": "Show me Mack parts inventory and performance",
+      "prompt_variations": [
+        "Analyze Mack parts inventory",
+        "Show Mack truck components in stock",
+        "Display Mack manufacturer performance"
+      ]
+    },
+    {
+      "id": "sales_by_customer_analysis_041",
+      "user_persona": "sales_manager",
+      "natural_language_prompt": "Show me sales totals grouped by customer for top buyers",
+      "prompt_variations": [
+        "Analyze sales by customer",
+        "Show customer purchase totals",
+        "Group sales data by buyer"
+      ]
+    }
+  ]
+}
