@@ -1,0 +1,898 @@
+{
+    "prompts": [
+        {
+          "id": "inventory_lookup_part_001",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Show me part number 0107-16-20",
+          "prompt_variations": [
+            "Get details for part 0107-16-20",
+            "Look up part number 0107-16-20",
+            "Find inventory item 0107-16-20"
+          ]
+        },
+        {
+          "id": "inventory_lookup_id_002",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Get inventory details for ID 5",
+          "prompt_variations": [
+            "Show inventory item with ID 5",
+            "Display details for inventory 5",
+            "Look up inventory record 5"
+          ]
+        },
+        {
+          "id": "customer_lookup_company_003",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Look up customer MARTIN MARIETTA MATERIALS, INC",
+          "prompt_variations": [
+            "Find customer Martin Marietta Materials",
+            "Show me MARTIN MARIETTA MATERIALS, INC details",
+            "Get customer info for Martin Marietta"
+          ]
+        },
+        {
+          "id": "customer_lookup_id_004",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Show customer ID 2 details",
+          "prompt_variations": [
+            "Get customer 2 information",
+            "Display customer record 2",
+            "Show details for customer ID 2"
+          ]
+        },
+        {
+          "id": "vehicle_lookup_vin_005",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Get vehicle with VIN 4LMSB2115HL031419",
+          "prompt_variations": [
+            "Look up VIN 4LMSB2115HL031419",
+            "Show vehicle 4LMSB2115HL031419",
+            "Find truck with VIN 4LMSB2115HL031419"
+          ]
+        },
+        {
+          "id": "vehicle_lookup_stock_006",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Show me vehicle stock number T25120",
+          "prompt_variations": [
+            "Get vehicle T25120",
+            "Look up stock number T25120",
+            "Find truck stock T25120"
+          ]
+        },
+        {
+          "id": "sales_order_lookup_id_007",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Display sales order 2",
+          "prompt_variations": [
+            "Get sales order 2",
+            "Show invoice 2",
+            "Look up order number 2"
+          ]
+        },
+        {
+          "id": "work_order_lookup_id_008",
+          "user_persona": "service_manager",
+          "natural_language_prompt": "Show work order 3 details",
+          "prompt_variations": [
+            "Get work order 3",
+            "Display service ticket 3",
+            "Show repair order 3"
+          ]
+        },
+        {
+          "id": "inventory_search_description_009",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Find parts with 'ADAPTER' in the description",
+          "prompt_variations": [
+            "Show me all adapter parts",
+            "Search for adapter components",
+            "List parts with adapter in name"
+          ]
+        },
+        {
+          "id": "customer_search_fleet_010",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Find customers with 'TRANSPORT' in company name",
+          "prompt_variations": [
+            "Show transport companies",
+            "Find transportation customers",
+            "List transport fleet customers"
+          ]
+        },
+        {
+          "id": "vehicle_search_make_011",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Show all Ottawa vehicles",
+          "prompt_variations": [
+            "Find Ottawa trucks",
+            "List Ottawa brand vehicles",
+            "Show me Ottawa equipment"
+          ]
+        },
+        {
+          "id": "sales_order_by_customer_012",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Show sales orders for ABC-CENTRAL BLOCK& BRICK",
+          "prompt_variations": [
+            "Get orders for ABC Central Block",
+            "Show ABC-CENTRAL sales history",
+            "Find purchases by ABC-CENTRAL BLOCK& BRICK"
+          ]
+        },
+        {
+          "id": "inventory_low_stock_013",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show parts with zero quantity",
+          "prompt_variations": [
+            "Find out of stock items",
+            "Show empty inventory",
+            "List parts with no quantity"
+          ]
+        },
+        {
+          "id": "vehicle_undismantled_014",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Find vehicles that haven't been dismantled yet",
+          "prompt_variations": [
+            "Show intact vehicles",
+            "List vehicles awaiting dismantling",
+            "Find whole unit vehicles"
+          ]
+        },
+        {
+          "id": "inventory_search_brake_parts_015",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Find all brake parts under $200",
+          "prompt_variations": [
+            "Show me brake components under $200",
+            "Find brake parts less than 200 dollars",
+            "List affordable brake parts"
+          ]
+        },
+        {
+          "id": "inventory_search_transmission_parts_016",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Show all transmission components",
+          "prompt_variations": [
+            "Find transmission parts",
+            "Search for gearbox components",
+            "Show transmission inventory"
+          ]
+        },
+        {
+          "id": "customer_search_transport_companies_017",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Find customers with 'TRANSPORT' in company name",
+          "prompt_variations": [
+            "Show transport companies",
+            "Find transportation fleet customers",
+            "List trucking companies"
+          ]
+        },
+        {
+          "id": "vehicle_search_ottawa_trucks_018",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Show all Ottawa brand vehicles",
+          "prompt_variations": [
+            "Find Ottawa trucks",
+            "List Ottawa brand equipment",
+            "Show Ottawa yard hostlers"
+          ]
+        },
+        {
+          "id": "inventory_zero_quantity_019",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show parts with zero quantity",
+          "prompt_variations": [
+            "Find out of stock items",
+            "Show empty inventory",
+            "List parts with no quantity"
+          ]
+        },
+        {
+          "id": "vehicle_undismantled_filter_020",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Find vehicles that haven't been dismantled yet",
+          "prompt_variations": [
+            "Show intact vehicles",
+            "List vehicles awaiting dismantling",
+            "Find whole unit vehicles"
+          ]
+        },
+        {
+          "id": "inventory_mack_parts_search_021",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Show all Mack parts sorted by price high to low",
+          "prompt_variations": [
+            "Find Mack truck parts",
+            "Show Mack components by price",
+            "List expensive Mack inventory"
+          ]
+        },
+        {
+          "id": "customer_active_status_filter_022",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Show only active customers",
+          "prompt_variations": [
+            "List active customers only",
+            "Show current customer accounts",
+            "Find customers who are still active"
+          ]
+        },
+        {
+          "id": "inventory_muncie_transmission_parts_023",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Find Muncie transmission and PTO parts over $100",
+          "prompt_variations": [
+            "Show Muncie transmission components over $100",
+            "Find expensive Muncie PTO parts",
+            "List Muncie gear and transmission parts"
+          ]
+        },
+        {
+          "id": "vehicle_autocar_year_range_024",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Show Autocar trucks from 2010 and newer",
+          "prompt_variations": [
+            "Find newer Autocar trucks",
+            "Show Autocar vehicles 2010 or later",
+            "List recent Autocar inventory"
+          ]
+        },
+        {
+          "id": "inventory_adapter_parts_search_025",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Search for adapter and fitting parts",
+          "prompt_variations": [
+            "Find adapter components",
+            "Show hydraulic adapters",
+            "Search for fitting parts"
+          ]
+        },
+        {
+          "id": "customer_fleet_with_balance_026",
+          "user_persona": "credit_manager",
+          "natural_language_prompt": "Find fleet customers with outstanding balances",
+          "prompt_variations": [
+            "Show fleet accounts with balances",
+            "Find trucking companies owing money",
+            "List fleet customers with outstanding debt"
+          ]
+        },
+        {
+          "id": "vehicle_capacity_saber_models_027",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Find Capacity trucks with Saber model designation",
+          "prompt_variations": [
+            "Show Capacity Saber trucks",
+            "Find Saber model yard hostlers",
+            "List Capacity vehicles with Saber designation"
+          ]
+        },
+        {
+          "id": "inventory_high_value_parts_028",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show parts worth more than $5000",
+          "prompt_variations": [
+            "Find expensive parts in stock",
+            "Show high-value inventory on hand",
+            "List costly components available"
+          ]
+        },
+        {
+          "id": "customer_phone_contact_search_029",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Find customers with 318 area code phone numbers",
+          "prompt_variations": [
+            "Show customers in 318 area code",
+            "Find local customers by phone area",
+            "List Shreveport area customers"
+          ]
+        },
+        {
+          "id": "vehicle_used_condition_filter_030",
+          "user_persona": "dismantler",
+          "natural_language_prompt": "Show vehicles marked as 'USED' condition",
+          "prompt_variations": [
+            "Find used condition vehicles",
+            "Show trucks marked as used",
+            "List vehicles in used condition"
+          ]
+        },
+        {
+          "id": "inventory_chelsea_manufacturer_031",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Find all Chelsea brand parts",
+          "prompt_variations": [
+            "Show Chelsea PTO parts",
+            "Find Chelsea hydraulic components",
+            "List Chelsea brand inventory"
+          ]
+        },
+        {
+          "id": "inventory_status_active_filter_032",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show only active status inventory",
+          "prompt_variations": [
+            "List active inventory items",
+            "Show current active parts",
+            "Find inventory with active status"
+          ]
+        },
+        {
+          "id": "customer_email_domain_search_033",
+          "user_persona": "marketing_manager",
+          "natural_language_prompt": "Find customers with Gmail email addresses",
+          "prompt_variations": [
+            "Show customers with Gmail accounts",
+            "Find Gmail email addresses",
+            "List customers using personal email"
+          ]
+        },
+        {
+          "id": "sales_order_profitability_033",
+          "user_persona": "sales_manager",
+          "natural_language_prompt": "Show me the most profitable sales orders from the last month with profit margins",
+          "prompt_variations": [
+            "Calculate profit margins on recent sales",
+            "Show profitable orders with cost breakdowns",
+            "Analyze sales order profitability this month"
+          ]
+        },
+        {
+          "id": "customer_aging_analysis_034",
+          "user_persona": "credit_manager",
+          "natural_language_prompt": "Find customers with outstanding balances over $1000 and their purchase history",
+          "prompt_variations": [
+            "Show customers with high outstanding balances",
+            "Find accounts receivable over $1000",
+            "List customers with aging balances and purchase history"
+          ]
+        },
+        {
+          "id": "work_order_service_analysis_035",
+          "user_persona": "service_manager",
+          "natural_language_prompt": "Show open work orders with job details and estimated completion times",
+          "prompt_variations": [
+            "List active service orders with job details",
+            "Show pending work orders and labor rates",
+            "Find open repair tickets with customer info"
+          ]
+        },
+        {
+          "id": "inventory_reorder_analysis_036",
+          "user_persona": "purchasing_manager",
+          "natural_language_prompt": "Find parts with zero quantity that have recent sales activity for reordering",
+          "prompt_variations": [
+            "Show out of stock items needing reorder",
+            "Find zero quantity parts with sales history",
+            "List reorder recommendations with vendor info"
+          ]
+        },
+        {
+          "id": "top_selling_parts_analysis_037",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show me the highest revenue generating parts with sales volume and profit margins",
+          "prompt_variations": [
+            "Find highest revenue parts by sales volume",
+            "Show top performing inventory items",
+            "Analyze best selling parts with profit data"
+          ]
+        },
+        {
+          "id": "customer_purchase_patterns_038",
+          "user_persona": "sales_manager",
+          "natural_language_prompt": "Analyze customer purchase patterns for fleet operators with repeat business",
+          "prompt_variations": [
+            "Show fleet customer buying patterns",
+            "Analyze transport company purchase history",
+            "Find repeat business patterns for fleet operators"
+          ]
+        },
+        {
+          "id": "service_revenue_analysis_039",
+          "user_persona": "service_manager",
+          "natural_language_prompt": "Calculate service department revenue by job type and labor rates",
+          "prompt_variations": [
+            "Calculate labor revenue by service type",
+            "Show service department earnings by job category",
+            "Analyze work order revenue and labor rates"
+          ]
+        },
+        {
+          "id": "parts_category_performance_040",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Analyze parts category performance by sales volume and profit margins",
+          "prompt_variations": [
+            "Show highest value parts by category",
+            "Analyze category performance by margins",
+            "Find top revenue parts by classification"
+          ]
+        },
+        {
+          "id": "monthly_sales_trends_041",
+          "user_persona": "sales_manager",
+          "natural_language_prompt": "Show monthly sales trends with customer and product analysis",
+          "prompt_variations": [
+            "Analyze sales performance by month",
+            "Show recent sales trends with customer breakdown",
+            "Track monthly revenue patterns by product"
+          ]
+        },
+        {
+          "id": "customer_credit_risk_analysis_042",
+          "user_persona": "credit_manager",
+          "natural_language_prompt": "Identify customers with credit risk based on balance vs credit limit ratios",
+          "prompt_variations": [
+            "Find customers exceeding credit limits",
+            "Analyze credit risk by balance ratios",
+            "Show high risk accounts with payment history"
+          ]
+        },
+        {
+          "id": "sales_performance_recent_045",
+          "user_persona": "sales_manager",
+          "natural_language_prompt": "Show me sales performance for the last 30 days",
+          "prompt_variations": [
+            "Show recent sales performance",
+            "Get sales data for the past month",
+            "Display finalized sales orders from last 30 days"
+          ]
+        },
+        {
+          "id": "customer_balance_analysis_046",
+          "user_persona": "credit_manager",
+          "natural_language_prompt": "What are our top customers by outstanding balance?",
+          "prompt_variations": [
+            "Show customers with highest balances",
+            "Find accounts with outstanding debt",
+            "List top debtors by balance amount"
+          ]
+        },
+        {
+          "id": "inventory_high_value_analysis_047",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show me the most valuable inventory we have in stock",
+          "prompt_variations": [
+            "Find old inventory that hasn't moved",
+            "Show aging stock analysis",
+            "Identify stagnant inventory items"
+          ]
+        },
+        {
+          "id": "profitability_analysis_048",
+          "user_persona": "financial_analyst",
+          "natural_language_prompt": "Calculate profit margins on high-value inventory",
+          "prompt_variations": [
+            "Show profit margins on expensive parts",
+            "Analyze pricing tiers and profitability",
+            "Calculate margins on high-value items"
+          ]
+        },
+        {
+          "id": "customer_credit_risk_analysis_049",
+          "user_persona": "credit_manager",
+          "natural_language_prompt": "Find customers who are over their credit limits",
+          "prompt_variations": [
+            "Show credit risk customers",
+            "Find accounts over credit limits",
+            "Analyze customer credit exposure"
+          ]
+        },
+        {
+          "id": "inventory_by_manufacturer_050",
+          "user_persona": "purchasing_manager",
+          "natural_language_prompt": "Show inventory distribution by manufacturer",
+          "prompt_variations": [
+            "Analyze inventory by brand",
+            "Show parts distribution by manufacturer",
+            "Group inventory by supplier"
+          ]
+        },
+        {
+          "id": "sales_order_line_analysis_051",
+          "user_persona": "sales_analyst",
+          "natural_language_prompt": "Analyze sales order details and line items for trends",
+          "prompt_variations": [
+            "Break down sales by line items",
+            "Show product sales details",
+            "Analyze sales order composition"
+          ]
+        },
+        {
+          "id": "pricing_tier_analysis_052",
+          "user_persona": "pricing_manager",
+          "natural_language_prompt": "Compare pricing tiers across inventory categories",
+          "prompt_variations": [
+            "Analyze pricing strategies",
+            "Compare price levels across tiers",
+            "Show markup analysis by category"
+          ]
+        },
+        {
+          "id": "customer_sales_frequency_053",
+          "user_persona": "customer_relationship_manager",
+          "natural_language_prompt": "Analyze customer purchase frequency and patterns",
+          "prompt_variations": [
+            "Show customer buying patterns",
+            "Analyze purchase frequency by customer",
+            "Track customer order history"
+          ]
+        },
+        {
+          "id": "inventory_location_analysis_054",
+          "user_persona": "warehouse_manager",
+          "natural_language_prompt": "Show inventory distribution across warehouse locations",
+          "prompt_variations": [
+            "Analyze warehouse inventory placement",
+            "Show parts location distribution",
+            "Map inventory to storage locations"
+          ]
+        },
+        {
+          "id": "seasonal_sales_trends_055",
+          "user_persona": "business_analyst",
+          "natural_language_prompt": "Analyze sales trends by month for seasonal patterns",
+          "prompt_variations": [
+            "Show monthly sales patterns",
+            "Analyze seasonal business trends",
+            "Track sales by time of year"
+          ]
+        },
+        {
+          "id": "service_labor_efficiency_056",
+          "user_persona": "service_manager",
+          "natural_language_prompt": "Analyze service department labor efficiency and rates",
+          "prompt_variations": [
+            "Show service department productivity",
+            "Analyze technician efficiency rates",
+            "Track labor performance metrics"
+          ]
+        },
+        {
+          "id": "top_selling_parts_analysis_057",
+          "user_persona": "inventory_analyst",
+          "natural_language_prompt": "Find our top-selling parts by quantity and revenue",
+          "prompt_variations": [
+            "Show best-selling inventory items",
+            "Analyze top revenue generating parts",
+            "Find most popular products by sales"
+          ]
+        },
+        {
+          "id": "customer_geographic_analysis_058",
+          "user_persona": "sales_director",
+          "natural_language_prompt": "Analyze customer distribution by geographic regions",
+          "prompt_variations": [
+            "Show customer locations by region",
+            "Analyze sales territory distribution",
+            "Map customers by geographic area"
+          ]
+        },
+        {
+          "id": "inventory_investment_analysis_059",
+          "user_persona": "financial_controller",
+          "natural_language_prompt": "Calculate total inventory investment and valuation",
+          "prompt_variations": [
+            "Show total inventory value",
+            "Calculate inventory investment levels",
+            "Analyze inventory asset valuation"
+          ]
+        },
+        {
+          "id": "salesperson_performance_analysis_060",
+          "user_persona": "sales_manager",
+          "natural_language_prompt": "Analyze sales performance by salesperson",
+          "prompt_variations": [
+            "Show sales rep performance metrics",
+            "Analyze salesperson productivity",
+            "Track individual sales achievements"
+          ]
+        },
+        {
+          "id": "parts_margin_analysis_061",
+          "user_persona": "pricing_analyst",
+          "natural_language_prompt": "Analyze profit margins across different part categories",
+          "prompt_variations": [
+            "Calculate profit margins by category",
+            "Show markup analysis across parts",
+            "Analyze pricing profitability by type"
+          ]
+        },
+        {
+          "id": "work_order_cost_analysis_062",
+          "user_persona": "service_controller",
+          "natural_language_prompt": "Analyze work order profitability and cost breakdown",
+          "prompt_variations": [
+            "Analyze service department profitability",
+            "Show work order cost breakdown",
+            "Calculate service margin analysis"
+          ]
+        },
+        {
+          "id": "manufacturer_performance_analysis_063",
+          "user_persona": "purchasing_manager",
+          "natural_language_prompt": "Show me Mack parts inventory and performance",
+          "prompt_variations": [
+            "Analyze Mack parts inventory",
+            "Show Mack truck components in stock",
+            "Display Mack manufacturer performance"
+          ]
+        },
+        {
+          "id": "sales_by_customer_analysis_064",
+          "user_persona": "sales_manager",
+          "natural_language_prompt": "Show me sales totals grouped by customer for top buyers",
+          "prompt_variations": [
+            "Analyze sales by customer",
+            "Show customer purchase totals",
+            "Group sales data by buyer"
+          ]
+        },
+        {
+          "id": "parts_counter_brake_search_065",
+          "user_persona": "parts_counter",
+          "natural_language_prompt": "Customer needs brake parts for a Freightliner Columbia, what do we have in stock?",
+          "prompt_variations": [
+            "Show me brake components for Freightliner trucks",
+            "What brake parts do we have for Columbia model",
+            "Find brake system parts for Freightliner"
+          ]
+        },
+        {
+          "id": "sales_quote_transmission_066",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Customer wants a quote for transmission replacement, show me our Allison transmissions",
+          "prompt_variations": [
+            "Show me Allison transmission options",
+            "Find transmissions from Allison for quote",
+            "List Allison transmission inventory"
+          ]
+        },
+        {
+          "id": "management_weekly_sales_067",
+          "user_persona": "manager",
+          "natural_language_prompt": "Show me this week's sales performance",
+          "prompt_variations": [
+            "Display sales results for this week",
+            "What are our sales numbers this week",
+            "Show weekly sales report"
+          ]
+        },
+        {
+          "id": "sales_customer_purchase_history_068",
+          "user_persona": "sales_rep",
+          "natural_language_prompt": "Show me purchase history for ABC-CENTRAL BLOCK& BRICK customer",
+          "prompt_variations": [
+            "Get sales history for ABC-CENTRAL BLOCK& BRICK",
+            "Show what ABC Central has purchased",
+            "Display customer order history for ABC Central"
+          ]
+        },
+        {
+          "id": "inventory_manager_low_stock_alert_069",
+          "user_persona": "inventory_manager",
+          "natural_language_prompt": "Show me all parts with quantity less than 5 that are active",
+          "prompt_variations": [
+            "Find items with low inventory levels",
+            "Show parts running low on stock",
+            "List active inventory below 5 units"
+          ]
+        },
+        {
+          "id": "service_manager_vehicle_maintenance_070",
+          "user_persona": "service_manager",
+          "natural_language_prompt": "Show me all Freightliner vehicles that need maintenance scheduling",
+          "prompt_variations": [
+            "Find Freightliner trucks for service scheduling",
+            "Show active Freightliner vehicles",
+            "List Freightliner fleet for maintenance"
+          ]
+        },
+        {
+          "id": "actual_071",
+          "user_persona": "",
+          "natural_language_prompt": "Summarize the following customer notes. Highlight repeat issues, delays, or complaints. Include last service update and action items.",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_072",
+          "user_persona": "",
+          "natural_language_prompt": "Rewrite the following technician notes into customer-facing language suitable for a phone call or email.",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_073",
+          "user_persona": "",
+          "natural_language_prompt": "List any sales orders missing a PO that are marked as PO-required. Return customer name and order date.",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_074",
+          "user_persona": "",
+          "natural_language_prompt": "Find me 25 customers who were previously active, whose sales have dropped off, so I can assign out CRM call tickets to my salesmen",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_075",
+          "user_persona": "What are the top items appearing on price quotes. ",
+          "natural_language_prompt": "",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_076",
+          "user_persona": "",
+          "natural_language_prompt": "Ignoring the quotes that turned into sales, what are the top items that are lost sales because we're not stocking them",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_077",
+          "user_persona": "",
+          "natural_language_prompt": "Find me the average sale price of Engines with model 3406B",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_078",
+          "user_persona": "",
+          "natural_language_prompt": "How many CAT 3406Bs do I have in stock",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_079",
+          "user_persona": "",
+          "natural_language_prompt": "How many vehicles do I have waiting to be dismantled",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_080",
+          "user_persona": "",
+          "natural_language_prompt": "How many CAT 3406Bs could I pull out of the vehicles I have waiting to be dismantled",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_081",
+          "user_persona": "Based on sales trends of hot engines and transmissions, which vehicle should I tear down next?",
+          "natural_language_prompt": "",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_082",
+          "user_persona": "",
+          "natural_language_prompt": "Do I have any Internet Orders I need to process right now?",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_083",
+          "user_persona": "",
+          "natural_language_prompt": "List all my open/unreceived POs",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_084",
+          "user_persona": "",
+          "natural_language_prompt": "List the 10 vehicles with the most remaining inventory value",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_085",
+          "user_persona": "",
+          "natural_language_prompt": "List the 10 vehicles with the most <sales/COGs/Profit>",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_086",
+          "user_persona": "",
+          "natural_language_prompt": "What is my gross margin on vehicle <X>",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_087",
+          "user_persona": "",
+          "natural_language_prompt": "Was vehicle <X> a good buy?",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_088",
+          "user_persona": "",
+          "natural_language_prompt": "How many parts have been sold off of vehicle <X>",
+          "prompt_variations": []
+        },
+            {
+          "id": "actual_089",
+          "user_persona": "",
+          "natural_language_prompt": "How many parts are still available on vehicle <X>",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_090",
+          "user_persona": "",
+          "natural_language_prompt": "How many <sales/quotes> have I written to customer <contact or company name X> in the last <month/year>",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_091",
+          "user_persona": "",
+          "natural_language_prompt": "How many purchase orders have I written to vendor <contact or company name X> in the last <month/year>",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_092",
+          "user_persona": "",
+          "natural_language_prompt": "What is the average <sales or revenue/profit> on invoices to customer <X> in the last <period Y>",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_093",
+          "user_persona": "How many available parts, listed online, don't have at least one public image",
+          "natural_language_prompt": "",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_094",
+          "user_persona": "",
+          "natural_language_prompt": "Do I have any active users that haven't logged in in more than 12 months",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_095",
+          "user_persona": "",
+          "natural_language_prompt": "Are there any CRM tickets that are past due?",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_096",
+          "user_persona": "",
+          "natural_language_prompt": "My salesman is going to be in <City X> next week, find my top 20 customers with 30 miles so I can assign CRM tickets for him to contact them while he's there",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_097",
+          "user_persona": "",
+          "natural_language_prompt": "What inventory has been sitting for too long and should be sold at auction?",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_098",
+          "user_persona": "",
+          "natural_language_prompt": "What inventory has been sitting for too long and should be sold at auction?",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_099",
+          "user_persona": "",
+          "natural_language_prompt": "Analyze our parts sales trends",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_100",
+          "user_persona": "",
+          "natural_language_prompt": "Summarize the repair history on unit 37A from ABC Logistics.",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_101",
+          "user_persona": "",
+          "natural_language_prompt": "Did we talk to the customer yesterday about the status of their truck in WO# 9823?",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_102",
+          "user_persona": "",
+          "natural_language_prompt": "Write a call script to explain to the customer why their transmission rebuild is delayed.",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_103",
+          "user_persona": "",
+          "natural_language_prompt": "Summarize the notes on MTP Work Order 1187 for billing review.",
+          "prompt_variations": []
+        },
+        {
+          "id": "actual_104",
+          "user_persona": "",
+          "natural_language_prompt": "Show me all work orders in the last 48 hours that haven’t been updated with a customer note.",
+          "prompt_variations": []
+        }  
+    ]
+}
