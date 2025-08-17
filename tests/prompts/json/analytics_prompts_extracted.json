@@ -8,7 +8,7 @@
   },
   "prompts": [
     {
-      "id": "sales_performance_recent_001",
+      "id": "sales_performance_recent_045",
       "user_persona": "sales_manager",
       "natural_language_prompt": "Show me sales performance for the last 30 days",
       "prompt_variations": [
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "customer_balance_analysis_002",
+      "id": "customer_balance_analysis_046",
       "user_persona": "credit_manager",
       "natural_language_prompt": "What are our top customers by outstanding balance?",
       "prompt_variations": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "id": "inventory_high_value_analysis_003",
+      "id": "inventory_high_value_analysis_047",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show me the most valuable inventory we have in stock",
       "prompt_variations": [
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "id": "profitability_analysis_004",
+      "id": "profitability_analysis_048",
       "user_persona": "financial_analyst",
       "natural_language_prompt": "Calculate profit margins on high-value inventory",
       "prompt_variations": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "id": "customer_credit_risk_analysis_005",
+      "id": "customer_credit_risk_analysis_049",
       "user_persona": "credit_manager",
       "natural_language_prompt": "Find customers who are over their credit limits",
       "prompt_variations": [
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "id": "inventory_by_manufacturer_045",
+      "id": "inventory_by_manufacturer_050",
       "user_persona": "purchasing_manager",
       "natural_language_prompt": "Show inventory distribution by manufacturer",
       "prompt_variations": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "id": "sales_order_line_analysis_046",
+      "id": "sales_order_line_analysis_051",
       "user_persona": "sales_analyst",
       "natural_language_prompt": "Analyze sales order details and line items for trends",
       "prompt_variations": [
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "id": "pricing_tier_analysis_048",
+      "id": "pricing_tier_analysis_052",
       "user_persona": "pricing_manager",
       "natural_language_prompt": "Compare pricing tiers across inventory categories",
       "prompt_variations": [
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "id": "customer_sales_frequency_049",
+      "id": "customer_sales_frequency_053",
       "user_persona": "customer_relationship_manager",
       "natural_language_prompt": "Analyze customer purchase frequency and patterns",
       "prompt_variations": [
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "id": "inventory_location_analysis_050",
+      "id": "inventory_location_analysis_054",
       "user_persona": "warehouse_manager",
       "natural_language_prompt": "Show inventory distribution across warehouse locations",
       "prompt_variations": [
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "id": "seasonal_sales_trends_051",
+      "id": "seasonal_sales_trends_055",
       "user_persona": "business_analyst",
       "natural_language_prompt": "Analyze sales trends by month for seasonal patterns",
       "prompt_variations": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "id": "service_labor_efficiency_052",
+      "id": "service_labor_efficiency_056",
       "user_persona": "service_manager",
       "natural_language_prompt": "Analyze service department labor efficiency and rates",
       "prompt_variations": [
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "id": "top_selling_parts_analysis_053",
+      "id": "top_selling_parts_analysis_057",
       "user_persona": "inventory_analyst",
       "natural_language_prompt": "Find our top-selling parts by quantity and revenue",
       "prompt_variations": [
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "id": "customer_geographic_analysis_054",
+      "id": "customer_geographic_analysis_058",
       "user_persona": "sales_director",
       "natural_language_prompt": "Analyze customer distribution by geographic regions",
       "prompt_variations": [
@@ -148,7 +148,7 @@
       ]
     },
     {
-      "id": "inventory_investment_analysis_055",
+      "id": "inventory_investment_analysis_059",
       "user_persona": "financial_controller",
       "natural_language_prompt": "Calculate total inventory investment and valuation",
       "prompt_variations": [
@@ -158,7 +158,7 @@
       ]
     },
     {
-      "id": "salesperson_performance_analysis_056",
+      "id": "salesperson_performance_analysis_060",
       "user_persona": "sales_manager",
       "natural_language_prompt": "Analyze sales performance by salesperson",
       "prompt_variations": [
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "id": "parts_margin_analysis_057",
+      "id": "parts_margin_analysis_061",
       "user_persona": "pricing_analyst",
       "natural_language_prompt": "Analyze profit margins across different part categories",
       "prompt_variations": [
@@ -178,7 +178,7 @@
       ]
     },
     {
-      "id": "work_order_cost_analysis_059",
+      "id": "work_order_cost_analysis_062",
       "user_persona": "service_controller",
       "natural_language_prompt": "Analyze work order profitability and cost breakdown",
       "prompt_variations": [
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "id": "manufacturer_performance_analysis_039",
+      "id": "manufacturer_performance_analysis_063",
       "user_persona": "purchasing_manager",
       "natural_language_prompt": "Show me Mack parts inventory and performance",
       "prompt_variations": [
@@ -198,7 +198,7 @@
       ]
     },
     {
-      "id": "sales_by_customer_analysis_041",
+      "id": "sales_by_customer_analysis_064",
       "user_persona": "sales_manager",
       "natural_language_prompt": "Show me sales totals grouped by customer for top buyers",
       "prompt_variations": [

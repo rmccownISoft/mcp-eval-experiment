@@ -8,7 +8,7 @@
   },
   "prompts": [
     {
-      "id": "parts_counter_brake_search_016",
+      "id": "parts_counter_brake_search_065",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Customer needs brake parts for a Freightliner Columbia, what do we have in stock?",
       "prompt_variations": [
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "sales_quote_transmission_018",
+      "id": "sales_quote_transmission_066",
       "user_persona": "sales_rep",
       "natural_language_prompt": "Customer wants a quote for transmission replacement, show me our Allison transmissions",
       "prompt_variations": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "id": "management_weekly_sales_019",
+      "id": "management_weekly_sales_067",
       "user_persona": "manager",
       "natural_language_prompt": "Show me this week's sales performance",
       "prompt_variations": [
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "id": "sales_customer_purchase_history_023",
+      "id": "sales_customer_purchase_history_068",
       "user_persona": "sales_rep",
       "natural_language_prompt": "Show me purchase history for ABC-CENTRAL BLOCK& BRICK customer",
       "prompt_variations": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "id": "inventory_manager_low_stock_alert_024",
+      "id": "inventory_manager_low_stock_alert_069",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show me all parts with quantity less than 5 that are active",
       "prompt_variations": [
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "id": "service_manager_vehicle_maintenance_025",
+      "id": "service_manager_vehicle_maintenance_070",
       "user_persona": "service_manager",
       "natural_language_prompt": "Show me all Freightliner vehicles that need maintenance scheduling",
       "prompt_variations": [

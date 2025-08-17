@@ -128,7 +128,7 @@
       ]
     },
     {
-      "id": "inventory_low_stock_014",
+      "id": "inventory_low_stock_013",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show parts with zero quantity",
       "prompt_variations": [
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "id": "vehicle_undismantled_015",
+      "id": "vehicle_undismantled_014",
       "user_persona": "dismantler",
       "natural_language_prompt": "Find vehicles that haven't been dismantled yet",
       "prompt_variations": [

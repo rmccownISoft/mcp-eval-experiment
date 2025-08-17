@@ -8,7 +8,7 @@
   },
   "prompts": [
     {
-      "id": "sales_order_profitability_001",
+      "id": "sales_order_profitability_033",
       "user_persona": "sales_manager",
       "natural_language_prompt": "Show me the most profitable sales orders from the last month with profit margins",
       "prompt_variations": [
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "customer_aging_analysis_002",
+      "id": "customer_aging_analysis_034",
       "user_persona": "credit_manager",
       "natural_language_prompt": "Find customers with outstanding balances over $1000 and their purchase history",
       "prompt_variations": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "id": "work_order_service_analysis_003",
+      "id": "work_order_service_analysis_035",
       "user_persona": "service_manager",
       "natural_language_prompt": "Show open work orders with job details and estimated completion times",
       "prompt_variations": [
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "id": "inventory_reorder_analysis_004",
+      "id": "inventory_reorder_analysis_036",
       "user_persona": "purchasing_manager",
       "natural_language_prompt": "Find parts with zero quantity that have recent sales activity for reordering",
       "prompt_variations": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "id": "top_selling_parts_analysis_005",
+      "id": "top_selling_parts_analysis_037",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show me the highest revenue generating parts with sales volume and profit margins",
       "prompt_variations": [
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "id": "customer_purchase_patterns_006",
+      "id": "customer_purchase_patterns_038",
       "user_persona": "sales_manager",
       "natural_language_prompt": "Analyze customer purchase patterns for fleet operators with repeat business",
       "prompt_variations": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "id": "service_revenue_analysis_007",
+      "id": "service_revenue_analysis_039",
       "user_persona": "service_manager",
       "natural_language_prompt": "Calculate service department revenue by job type and labor rates",
       "prompt_variations": [
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "id": "parts_category_performance_010",
+      "id": "parts_category_performance_040",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Analyze parts category performance by sales volume and profit margins",
       "prompt_variations": [
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "id": "monthly_sales_trends_011",
+      "id": "monthly_sales_trends_041",
       "user_persona": "sales_manager",
       "natural_language_prompt": "Show monthly sales trends with customer and product analysis",
       "prompt_variations": [
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "id": "customer_credit_risk_analysis_012",
+      "id": "customer_credit_risk_analysis_042",
       "user_persona": "credit_manager",
       "natural_language_prompt": "Identify customers with credit risk based on balance vs credit limit ratios",
       "prompt_variations": [

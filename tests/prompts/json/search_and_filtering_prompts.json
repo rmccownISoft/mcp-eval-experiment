@@ -8,7 +8,7 @@
   },
   "prompts": [
     {
-      "id": "inventory_search_brake_parts_016",
+      "id": "inventory_search_brake_parts_015",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Find all brake parts under $200",
       "prompt_variations": [
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "id": "inventory_search_transmission_parts_017",
+      "id": "inventory_search_transmission_parts_016",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Show all transmission components",
       "prompt_variations": [
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "id": "customer_search_transport_companies_018",
+      "id": "customer_search_transport_companies_017",
       "user_persona": "sales_rep",
       "natural_language_prompt": "Find customers with 'TRANSPORT' in company name",
       "prompt_variations": [
@@ -38,7 +38,7 @@
       ]
     },
     {
-      "id": "vehicle_search_ottawa_trucks_019",
+      "id": "vehicle_search_ottawa_trucks_018",
       "user_persona": "dismantler",
       "natural_language_prompt": "Show all Ottawa brand vehicles",
       "prompt_variations": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "id": "inventory_zero_quantity_020",
+      "id": "inventory_zero_quantity_019",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show parts with zero quantity",
       "prompt_variations": [
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "id": "vehicle_undismantled_filter_021",
+      "id": "vehicle_undismantled_filter_020",
       "user_persona": "dismantler",
       "natural_language_prompt": "Find vehicles that haven't been dismantled yet",
       "prompt_variations": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "id": "inventory_mack_parts_search_022",
+      "id": "inventory_mack_parts_search_021",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Show all Mack parts sorted by price high to low",
       "prompt_variations": [
@@ -78,7 +78,7 @@
       ]
     },
     {
-      "id": "customer_active_status_filter_023",
+      "id": "customer_active_status_filter_022",
       "user_persona": "sales_rep",
       "natural_language_prompt": "Show only active customers",
       "prompt_variations": [
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "id": "inventory_muncie_transmission_parts_024",
+      "id": "inventory_muncie_transmission_parts_023",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Find Muncie transmission and PTO parts over $100",
       "prompt_variations": [
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "id": "vehicle_autocar_year_range_025",
+      "id": "vehicle_autocar_year_range_024",
       "user_persona": "dismantler",
       "natural_language_prompt": "Show Autocar trucks from 2010 and newer",
       "prompt_variations": [
@@ -108,7 +108,7 @@
       ]
     },
     {
-      "id": "inventory_adapter_parts_search_026",
+      "id": "inventory_adapter_parts_search_025",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Search for adapter and fitting parts",
       "prompt_variations": [
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "id": "customer_fleet_with_balance_027",
+      "id": "customer_fleet_with_balance_026",
       "user_persona": "credit_manager",
       "natural_language_prompt": "Find fleet customers with outstanding balances",
       "prompt_variations": [
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "id": "vehicle_capacity_saber_models_028",
+      "id": "vehicle_capacity_saber_models_027",
       "user_persona": "dismantler",
       "natural_language_prompt": "Find Capacity trucks with Saber model designation",
       "prompt_variations": [
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "id": "inventory_high_value_parts_029",
+      "id": "inventory_high_value_parts_028",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show parts worth more than $5000",
       "prompt_variations": [
@@ -148,7 +148,7 @@
       ]
     },
     {
-      "id": "customer_phone_contact_search_030",
+      "id": "customer_phone_contact_search_029",
       "user_persona": "sales_rep",
       "natural_language_prompt": "Find customers with 318 area code phone numbers",
       "prompt_variations": [
@@ -158,7 +158,7 @@
       ]
     },
     {
-      "id": "vehicle_used_condition_filter_031",
+      "id": "vehicle_used_condition_filter_030",
       "user_persona": "dismantler",
       "natural_language_prompt": "Show vehicles marked as 'USED' condition",
       "prompt_variations": [
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "id": "inventory_chelsea_manufacturer_032",
+      "id": "inventory_chelsea_manufacturer_031",
       "user_persona": "parts_counter",
       "natural_language_prompt": "Find all Chelsea brand parts",
       "prompt_variations": [
@@ -178,7 +178,7 @@
       ]
     },
     {
-      "id": "inventory_status_active_filter_034",
+      "id": "inventory_status_active_filter_032",
       "user_persona": "inventory_manager",
       "natural_language_prompt": "Show only active status inventory",
       "prompt_variations": [
@@ -188,7 +188,7 @@
       ]
     },
     {
-      "id": "customer_email_domain_search_035",
+      "id": "customer_email_domain_search_033",
       "user_persona": "marketing_manager",
       "natural_language_prompt": "Find customers with Gmail email addresses",
       "prompt_variations": [
